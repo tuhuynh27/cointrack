@@ -1,0 +1,42 @@
+.portfolio-show {
+  width: calc(100vw - 40px);
+  @media screen and (max-width: 559px) {
+    width: 100%;
+  }
+  max-width: 1136px;
+  margin-bottom: 50px;
+  text-align: center;
+
+  h1, p {
+    text-align: center;
+  }
+
+  h1 {
+    font-weight: 500;
+    font-size: 40px;
+    margin: 0;
+
+    @media screen and (max-width: 559px) {
+      padding: 0 40px;
+      font-size: 34px;
+    }
+  }
+
+  p {
+    color: rgb(91, 97, 110);
+
+    @media screen and (max-width: 559px) {
+      padding: 0 30px;
+      font-size: 16px;
+    }
+  }
+
+  img {
+    width: 100%;
+    max-width: 700px;
+
+    @media screen and (max-width: 559px) {
+      width: 80%;
+    }
+  }
+}

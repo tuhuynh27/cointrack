@@ -1,0 +1,89 @@
+.heading {
+  max-width: 1024px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  padding: 24px;
+  margin-bottom: 50px;
+
+  .left-side {
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+
+    @media screen and (max-width: 899px) {
+      align-items: center;
+    }
+
+    h1 {
+      font-family: 'CoinbaseDisplay',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      line-height: 1.2;
+      max-width: 500px;
+      margin: 0;
+      font-weight: 500;
+      font-size: 62px;
+
+      @media screen and (max-width: 899px) {
+        max-width: unset;
+      }
+
+      @media screen and (max-width: 559px) {
+        font-size: 28px;
+      }
+    }
+    h2 {
+      margin: 0;
+      font-weight: 500;
+      font-size: 20px;
+
+      @media screen and (max-width: 559px) {
+        font-size: 16px;
+      }
+    }
+
+    .get-start {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      width: 100%;
+
+      @media screen and (max-width: 559px) {
+        flex-direction: column;
+      }
+
+      input {
+        flex: 2.5;
+        font-size: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        flex: 1;
+        font-size: 16px;
+        font-weight: 500;
+        background-color: rgb(0, 82, 255);
+        color: white;
+        border: 1px solid transparent;
+        padding: 25px 35px;
+        border-radius: 5px;
+      }
+    }
+  }
+
+  .right-side {
+    flex:  1 0;
+    svg {
+      height: 600px;
+      width: auto;
+    }
+
+    @media screen and (max-width: 899px) {
+      display: none;
+    }
+  }
+}
