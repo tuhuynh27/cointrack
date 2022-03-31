@@ -90,7 +90,7 @@ function IndexChart() {
             <th>Name</th>
             <th className="price" style={{ width: '15%' }}>Price</th>
             <th className="change" style={{ width: '10%' }}>Change</th>
-            <th className="volume" style={{ width: '15%' }}>Volume</th>
+            <th className="volume" style={{ width: '10%' }}>Volume</th>
             <th className="trade" style={{ width: '10%' }}>Track</th>
           </tr>
         </thead>
@@ -123,7 +123,7 @@ function IndexChart() {
               </div>
             </td>
             <td className="volume">
-              USD {coin.volume}
+              {coin.volume}
             </td>
             <td className="trade">
               <button>Track</button>
