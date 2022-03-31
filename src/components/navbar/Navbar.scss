@@ -30,6 +30,11 @@
       flex-direction: row;
       height: 100%;
 
+      a {
+        text-decoration: none;
+        color: black;
+      }
+
       div {
         font-size: 14px;
         font-weight: 500;

@@ -1,0 +1,29 @@
+.notfound-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  .head-line {
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  .second-line {
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .back-button {
+    margin-top: 20px;
+
+    button {
+      margin: 0;
+      padding: 10px 40px;
+      border: 1px solid #333;
+      border-radius: 4px;
+      background-color: white;
+    }
+  }
+}
