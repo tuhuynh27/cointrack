@@ -1,6 +1,6 @@
 import './Heading.scss'
 
-import MobileAppIconSvg from 'components/svg/MobileAppIconSvg'
+import MobileAppIconSvg from 'modules/svg/MobileAppIconSvg'
 
 function Heading() {
   return (
