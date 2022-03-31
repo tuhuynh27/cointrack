@@ -23,6 +23,7 @@ function reducer(state, action) {
           return {
             ...e,
             change: action.change,
+            volume: action.volume,
           }
         }
         return e
@@ -41,7 +42,12 @@ function IndexChart() {
         const resp = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${e.code}USDT`)
         const data = await resp.json()
         const change = parseFloat(data.priceChangePercent)
-        dispatch({ type: 'updateChange', code: e.code, change: change.toFixed(2) })
+        const avg = (parseFloat(data.highPrice) + parseFloat(data.lowPrice)) / 2
+        const val = (parseFloat(data.volume) * avg).toFixed(0)
+        const volume = (val / 1000000).toFixed(2)
+        const volumeStr = volume > 1000 ? `${(volume / 1000).toFixed(2)}B` : `${volume}M`
+        dispatch({ type: 'updateChange', code: e.code,
+          change: change.toFixed(2), volume: volumeStr })
       }
     }, [dispatch]
   )
@@ -82,8 +88,9 @@ function IndexChart() {
           <tr>
             <th className="index" style={{ width: '5%' }}>#</th>
             <th>Name</th>
-            <th className="price" style={{ width: '20%' }}>Price</th>
+            <th className="price" style={{ width: '15%' }}>Price</th>
             <th className="change" style={{ width: '10%' }}>Change</th>
+            <th className="volume" style={{ width: '15%' }}>Volume</th>
             <th className="trade" style={{ width: '10%' }}>Track</th>
           </tr>
         </thead>
@@ -114,6 +121,9 @@ function IndexChart() {
               <div style={{ color: coin.change > 0 ? 'green' : 'red' }}>
                 {coin.change > 0 ? '+' : ''}{coin.change}%
               </div>
+            </td>
+            <td className="volume">
+              USD {coin.volume}
             </td>
             <td className="trade">
               <button>Track</button>

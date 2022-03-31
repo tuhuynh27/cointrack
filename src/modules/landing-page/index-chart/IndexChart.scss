@@ -14,6 +14,7 @@
     margin: 0;
     padding: 0;
     border-collapse: collapse;
+    overflow-x: scroll;
     @media screen and (max-width: 559px) {
       border-radius: 0;
       box-shadow: none;
@@ -110,6 +111,12 @@
     }
 
     .change {
+      @media screen and (max-width: 889px) {
+        display: none;
+      }
+    }
+
+    .volume {
       @media screen and (max-width: 559px) {
         display: none;
       }
