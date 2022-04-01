@@ -1,4 +1,4 @@
-import './App.scss'
+import styles from './App.module.scss'
 
 import {
   BrowserRouter,
@@ -13,9 +13,9 @@ import NotFound from './modules/not-found/NotFound'
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className={styles.app}>
         <Navbar/>
-        <div className="outlet">
+        <div className={styles.outlet}>
           <Routes>
             <Route exact path="/" element={<LandingPage/>}/>
             <Route path="*" element={<NotFound/>} />

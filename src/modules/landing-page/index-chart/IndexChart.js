@@ -98,10 +98,10 @@ function IndexChart() {
           {state.map((coin, index) => <tr key={coin.name}>
             <td className={styles.index}>{index + 1}</td>
             <td>
-              <div className={styles.coinName}>
+              <div className={styles.nameColumn}>
                 <img className={styles.logo} alt="Coin Logo" src={coin.logo}/>
                 <div className={styles.title}>
-                  <div>{coin.name}</div>
+                  <div className={styles.coinName}>{coin.name}</div>
                   <div className={styles.coinCode}>{coin.code}</div>
                 </div>
               </div>

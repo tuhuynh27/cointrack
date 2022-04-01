@@ -1,3 +1,5 @@
+@import "styles/variables";
+
 .heading {
   max-width: 1024px;
   display: flex;
@@ -66,7 +68,7 @@
         flex: 1;
         font-size: 16px;
         font-weight: 500;
-        background-color: rgb(0, 82, 255);
+        background-color: $primary-color;
         color: white;
         border: 1px solid transparent;
         padding: 25px 35px;

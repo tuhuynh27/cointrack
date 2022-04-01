@@ -55,7 +55,7 @@
     td {
       font-size: 18px;
 
-      .coinName {
+      .nameColumn {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -69,6 +69,10 @@
           @media screen and (max-width: 559px) {
             flex-direction: column;
             gap: 0;
+          }
+
+          .coinName {
+
           }
 
           .coinCode {
