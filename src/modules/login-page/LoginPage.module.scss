@@ -1,0 +1,103 @@
+@import "styles/variables";
+
+.loginPage {
+  width: 100%;
+  max-width: 559px;
+
+  .loginBox {
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid $border-color;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    h1 {
+      padding: 0;
+      margin: 0 0 20px 0;
+    }
+
+    .loginForm {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .inputElement {
+        display: flex;
+        flex-direction: column;
+
+        input {
+          margin-top: 10px;
+          font-size: 16px;
+          padding: 20px 10px;
+          border: 1px solid $border-color;
+          border-radius: 10px;
+
+          &.error {
+            border-color: red;
+          }
+        }
+
+        .errorMessage {
+          margin: 0;
+          color: red;
+        }
+      }
+    }
+
+    .buttonGroup {
+      margin-top: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      button {
+        padding: 20px 10px;
+        border: 0;
+        border-radius: 10px;
+        background: $primary-color;
+        color: white;
+        font-weight: 500;
+        font-size: 16px;
+        position: relative;
+
+        &.secondaryButton {
+          background: white;
+          color: black;
+          border: 1px solid $border-color;
+        }
+
+        &.loading {
+          color: $primary-color;
+        }
+
+        &.loading::after {
+          content: "";
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          margin: auto;
+          border: 4px solid transparent;
+          border-top-color: #ffffff;
+          border-radius: 50%;
+          animation: button-loading-spinner 1s ease infinite;
+        }
+      }
+    }
+  }
+}
+
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}

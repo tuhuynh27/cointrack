@@ -34,12 +34,12 @@ function Navbar() {
         <Link to="/"><img src={Logo} alt="Logo"/></Link>
         <div className={styles.menu}>
           {menu.map(m => (
-            <Link to={m.link}><div key={m.link}>{m.text}</div></Link>
+            <Link to={m.link} key={m.link}><div>{m.text}</div></Link>
           ))}
         </div>
         <div className={styles.buttons}>
-          <button className={styles.signIn}>Sign in</button>
-          <button className={styles.getStarted}>Get started</button>
+          <Link to='/login'><button className={styles.signIn}>Sign in</button></Link>
+          <Link to='/login'><button className={styles.getStarted}>Get started</button></Link>
         </div>
       </div>
     </div>

@@ -1,5 +1,7 @@
 import styles from './Heading.module.scss'
 
+import { Link } from 'react-router-dom'
+
 import MobileAppIconSvg from 'modules/svg/MobileAppIconSvg'
 
 function Heading() {
@@ -13,7 +15,7 @@ function Heading() {
         </h2>
         <div className={styles.getStarted}>
           <input placeholder="Email address" />
-          <button>Get started</button>
+          <Link to="/login"><button>Get started</button></Link>
         </div>
       </div>
       <div className={styles.rightSide}>

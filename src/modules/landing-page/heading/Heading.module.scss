@@ -9,6 +9,7 @@
   gap: 25px;
   padding: 24px;
   margin-bottom: 50px;
+  margin-top: 50px;
 
   .leftSide {
     display: flex;
@@ -55,6 +56,7 @@
 
       @media screen and (max-width: 559px) {
         flex-direction: column;
+        gap: 10px;
       }
 
       input {
@@ -64,15 +66,21 @@
         border: 1px solid $border-color;
       }
 
-      button {
-        flex: 1;
-        font-size: 16px;
-        font-weight: 500;
-        background-color: $primary-color;
-        color: white;
-        border: 1px solid transparent;
-        padding: 25px 35px;
-        border-radius: 5px;
+      a {
+        text-decoration: none;
+        color: black;
+
+        button {
+          width: 100%;
+          flex: 1;
+          font-size: 16px;
+          font-weight: 500;
+          background-color: $primary-color;
+          color: white;
+          border: 1px solid transparent;
+          padding: 25px 35px;
+          border-radius: 5px;
+        }
       }
     }
   }
