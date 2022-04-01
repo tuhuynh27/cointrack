@@ -3,23 +3,24 @@ import { useCallback, useEffect, useReducer } from 'react'
 function reducer(state, action) {
   switch (action.type) {
     case 'updatePrices':
-      const data = action.data
+      const pricesObj = action.data
       return state.map(e => {
-        if (data[e.code.toLowerCase()]) {
+        if (pricesObj[e.code]) {
           return {
             ...e,
-            price: data[e.code.toLowerCase()],
+            price: pricesObj[e.code],
           }
         }
         return e
       })
-    case 'updateChange':
+    case 'updateChanges':
+      const changesObj = action.data
       return state.map(e => {
-        if (e.code === action.code.toUpperCase()) {
+        if (changesObj[e.code]) {
           return {
             ...e,
-            change: action.change,
-            volume: action.volume,
+            change: changesObj[e.code].change,
+            volume: changesObj[e.code].volume,
           }
         }
         return e
@@ -38,29 +39,31 @@ function init(coins) {
   }))
 }
 
-function useUpdatePrice() {
-  let data = {}
-  function update(code, price) {
-    data[code] = price
+// Batch changes
+function useContainer(actionType) {
+  let data = Object.create(null)
+  function update(code, val) {
+    data[code] = val
   }
   function flushDataToStore(dispatch) {
     dispatch({
-      type: 'updatePrices',
+      type: actionType,
       data,
     })
-    data = {}
+    data = Object.create(null)
   }
   return { update, flushDataToStore }
 }
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
-const priceDataContainer = useUpdatePrice()
+const priceDataContainer = useContainer('updatePrices')
 
 export default function useCoinData(coins) {
   const [state, dispatch] = useReducer(reducer, coins, init)
 
   const loadMeta = useCallback(
     async () => {
+      const obj = Object.create(null)
       for (const e of coins) {
         const resp = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${e.code}USDT`)
         const data = await resp.json()
@@ -69,9 +72,12 @@ export default function useCoinData(coins) {
         const val = (parseFloat(data.volume) * avg).toFixed(0)
         const volume = (val / 1000000).toFixed(2)
         const volumeStr = volume > 1000 ? `${(volume / 1000).toFixed(2)}B` : `${volume}M`
-        dispatch({ type: 'updateChange', code: e.code,
-          change: change.toFixed(2), volume: volumeStr })
+        obj[e.code] = {
+          change: change.toFixed(2),
+          volume: volumeStr,
+        }
       }
+      dispatch({ type: 'updateChanges', data: obj })
     }, [coins]
   )
 
@@ -88,7 +94,7 @@ export default function useCoinData(coins) {
   useEffect(() => {
     const interval = setInterval(() => {
       priceDataContainer.flushDataToStore(dispatch)
-    }, 1000)
+    }, 500)
     return () => {
       clearInterval(interval)
     }
@@ -103,8 +109,8 @@ export default function useCoinData(coins) {
       const { stream, data } = payload
       const priceFloat = parseFloat(data.p)
       const price = priceFloat.toFixed(2)
-      const code = stream.substring(0, 3)
-      // dispatch({ type: 'updatePrice', code, price })
+      const code = stream.substring(0, 3).toUpperCase()
+
       priceDataContainer.update(code, price)
     }
     socket.addEventListener('message', updateRealtime)
