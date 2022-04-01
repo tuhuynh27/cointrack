@@ -69,7 +69,7 @@ function LoginPage() {
             {passwordError.length ? <p className={styles.errorMessage}>{passwordError}</p> : null}
           </div>
           <div className={styles.buttonGroup}>
-            <button className={isLoading ? styles.loading : null} onClick={handleSubmit} type="submit">Continue</button>
+            <button disabled={isLoading} className={isLoading ? styles.loading : null} onClick={handleSubmit} type="submit">Continue</button>
             <button className={styles.secondaryButton} type="button">Create account</button>
           </div>
         </form>
