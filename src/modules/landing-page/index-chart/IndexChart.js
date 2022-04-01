@@ -1,6 +1,8 @@
 import { useReducer, useEffect, useCallback } from 'react'
 import styles from './IndexChart.module.scss'
 
+import { Link } from 'react-router-dom'
+
 import { indexData } from './data'
 
 const initialState = indexData
@@ -126,7 +128,7 @@ function IndexChart() {
               {coin.volume}
             </td>
             <td className={styles.trade}>
-              <button>Track</button>
+              <Link to="/portfolio"><button>Track</button></Link>
             </td>
           </tr>)}
         </tbody>
