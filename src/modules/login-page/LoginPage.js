@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import styles from './LoginPage.module.scss'
 
 import { validateEmail } from 'utils/validation'
+import { getQueryParam } from 'utils/queryString'
 
 function LoginPage() {
   const emailInputRef = useRef(null)
@@ -16,6 +17,13 @@ function LoginPage() {
       emailInputRef.current.focus()
     }
   }, [emailInputRef])
+
+  useEffect(() => {
+    const param = getQueryParam('email')
+    if (param) {
+      setEmail(param)
+    }
+  }, [])
 
   function handleInputChange(e) {
     const { id, value } = e.target

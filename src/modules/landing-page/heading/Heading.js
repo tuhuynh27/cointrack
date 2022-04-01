@@ -1,10 +1,19 @@
+import { useState } from 'react'
 import styles from './Heading.module.scss'
 
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import MobileAppIconSvg from 'modules/svg/MobileAppIconSvg'
 
 function Heading() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('')
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    navigate(`login?email=${email}`)
+  }
+
   return (
     <div className={styles.heading}>
       <div className={styles.leftSide}>
@@ -13,10 +22,10 @@ function Heading() {
           Cointrack is the easiest place to keep track of your cryptocurrency. Sign
           up and get started today.
         </h2>
-        <div className={styles.getStarted}>
-          <input placeholder="Email address" />
-          <Link to="/login"><button>Get started</button></Link>
-        </div>
+        <form className={styles.getStarted} onSubmit={handleSubmit}>
+          <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email address" />
+          <button type="submit">Get started</button>
+        </form>
       </div>
       <div className={styles.rightSide}>
         <MobileAppIconSvg />
