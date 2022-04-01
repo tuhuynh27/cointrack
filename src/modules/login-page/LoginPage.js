@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import styles from './LoginPage.module.scss'
 
+import { validateEmail } from 'utils/validation'
+
 function LoginPage() {
   const emailInputRef = useRef(null)
   const [email, setEmail] = useState('')
@@ -30,6 +32,8 @@ function LoginPage() {
     e.preventDefault()
     if (email === '') {
       setEmailError('Email is required')
+    } else if (!validateEmail(email)) {
+      setEmailError('Email is invalid')
     } else if (password === '') {
       setPasswordError('Password is required')
     } else {
