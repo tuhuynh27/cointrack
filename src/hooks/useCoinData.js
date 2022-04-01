@@ -2,12 +2,13 @@ import { useCallback, useEffect, useReducer } from 'react'
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'updatePrice':
+    case 'updatePrices':
+      const data = action.data
       return state.map(e => {
-        if (e.code === action.code.toUpperCase()) {
+        if (data[e.code.toLowerCase()]) {
           return {
             ...e,
-            price: action.price,
+            price: data[e.code.toLowerCase()],
           }
         }
         return e
@@ -36,6 +37,24 @@ function init(coins) {
     volume: 0,
   }))
 }
+
+function useUpdatePrice() {
+  let data = {}
+  function update(code, price) {
+    data[code] = price
+  }
+  function flushDataToStore(dispatch) {
+    dispatch({
+      type: 'updatePrices',
+      data,
+    })
+    data = {}
+  }
+  return { update, flushDataToStore }
+}
+
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const priceDataContainer = useUpdatePrice()
 
 export default function useCoinData(coins) {
   const [state, dispatch] = useReducer(reducer, coins, init)
@@ -67,6 +86,15 @@ export default function useCoinData(coins) {
   }, [loadMeta])
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      priceDataContainer.flushDataToStore(dispatch)
+    }, 1000)
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
+  useEffect(() => {
     const listWatchStream = coins.map(e =>`${e.code.toLowerCase()}usdt@aggTrade`)
     const connectStr = listWatchStream.join('/')
     const socket = new WebSocket('wss://stream.binance.com:9443/stream?streams=' + connectStr)
@@ -76,7 +104,8 @@ export default function useCoinData(coins) {
       const priceFloat = parseFloat(data.p)
       const price = priceFloat.toFixed(2)
       const code = stream.substring(0, 3)
-      dispatch({ type: 'updatePrice', code, price })
+      // dispatch({ type: 'updatePrice', code, price })
+      priceDataContainer.update(code, price)
     }
     socket.addEventListener('message', updateRealtime)
     return () => {

@@ -6,7 +6,7 @@ import useCoinData from 'hooks/useCoinData'
 import { indexCoins } from './data'
 
 function IndexChart() {
-  const state = useCoinData(indexCoins)
+  const data = useCoinData(indexCoins)
 
   return (
     <div className={styles.indexChart}>
@@ -22,7 +22,7 @@ function IndexChart() {
           </tr>
         </thead>
         <tbody>
-          {state.map((coin, index) => <tr key={coin.name}>
+          {data.map((coin, index) => <tr key={coin.name}>
             <td className={styles.index}>{index + 1}</td>
             <td>
               <div className={styles.nameColumn}>
