@@ -13,9 +13,17 @@
     flex-direction: column;
     gap: 10px;
 
+    @media (max-width: 559px) {
+      gap: 0;
+    }
+
     h1 {
       padding: 0;
       margin: 0 0 20px 0;
+
+      @media (max-width: 559px) {
+        font-size: 24px;
+      }
     }
 
     .loginForm {
@@ -33,6 +41,11 @@
           padding: 20px 10px;
           border: 1px solid $border-color;
           border-radius: 10px;
+
+          @media screen and (max-width: 559px) {
+            padding: 10px 5px;
+            font-size: 14px;
+          }
 
           &.error {
             border-color: red;
@@ -61,6 +74,11 @@
         font-weight: 500;
         font-size: 16px;
         position: relative;
+
+        @media screen and (max-width: 559px) {
+          padding: 10px 5px;
+          font-size: 14px;
+        }
 
         &.secondaryButton {
           background: white;
