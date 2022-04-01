@@ -8,8 +8,16 @@ import { indexCoins } from './data'
 function IndexChart() {
   const data = useCoinData(indexCoins)
 
+  const marketStatus = (data.reduce((sum, coin) => sum + parseFloat(coin.change), 0) / data.length)
+
   return (
     <div className={styles.indexChart}>
+      <div className={styles.marketInfo}>
+        <p>In the past 24 hours</p>
+        <h2>Market is {marketStatus >= 0 ? 'up' : 'down'}&nbsp;
+          <span style={{ color: marketStatus >= 0 ? 'green' : 'red' }}>
+            {Math.abs(marketStatus).toFixed(2)}%</span></h2>
+      </div>
       <table>
         <thead>
           <tr>
