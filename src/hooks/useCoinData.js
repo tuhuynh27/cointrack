@@ -73,10 +73,16 @@ export default function useCoinData(coins) {
   }, [loadMeta])
 
   useEffect(() => {
-    const listWatchStream = coins.map(e =>`${e.code.toLowerCase()}usdt@aggTrade`)
-    const connectStr = listWatchStream.join('/')
-    const socket = new WebSocket('wss://stream.binance.com:9443/stream?streams=' + connectStr)
+    // Batch update prices
     let obj = Object.create(null)
+    const interval = setInterval(() => {
+      dispatch({
+        type: 'updatePrices',
+        data: obj,
+      })
+      obj = Object.create(null)
+    }, 500)
+
     function updateRealtime(e) {
       const payload = JSON.parse(e.data)
       const { stream, data } = payload
@@ -85,14 +91,23 @@ export default function useCoinData(coins) {
       const code = stream.substring(0, 3).toUpperCase()
       obj[code] = price
     }
-    const interval = setInterval(() => {
-      dispatch({
-        type: 'updatePrices',
-        data: obj,
+
+    const listWatchStream = coins.map(e =>`${e.code.toLowerCase()}usdt@aggTrade`)
+    const connectStr = listWatchStream.join('/')
+    let socket = null
+
+    function connect() {
+      socket = new WebSocket('wss://stream.binance.com:9443/stream?streams=' + connectStr)
+      socket.addEventListener('message', updateRealtime)
+      socket.addEventListener('error', () => {
+        socket.close()
+        socket = null
+        setTimeout(() => connect(), 1000)
       })
-      obj = Object.create(null)
-    }, 500)
-    socket.addEventListener('message', updateRealtime)
+    }
+
+    connect()
+
     return () => {
       clearInterval(interval)
       socket.removeEventListener('message', updateRealtime)
