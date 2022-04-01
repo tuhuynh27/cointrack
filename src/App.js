@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react'
 import styles from './App.module.scss'
 
 import {
@@ -19,9 +20,13 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 function Router() {
   const location = useLocation();
 
+  useLayoutEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <TransitionGroup component={null}>
-      <CSSTransition key={location.key} classNames="fade" timeout={300}>
+      <CSSTransition key={location.pathname} exit={false} classNames="fade" timeout={300}>
         <div className={styles.outlet}>
           <Routes>
             <Route exact path="/" element={<LandingPage/>}/>

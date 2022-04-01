@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import LoginPage from '../../modules/login-page/LoginPage'
+import LoginPage from 'modules/login-page/LoginPage'
 
 function RequireAuth({ children }) {
-  const [isAuthenticated] = useState(false);
+  const [isAuthenticated] = useState(false)
 
   if (!isAuthenticated) {
     return <React.Fragment>

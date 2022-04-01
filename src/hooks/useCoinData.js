@@ -119,9 +119,12 @@ export default function useCoinData(coins) {
 
     return () => {
       clearInterval(interval)
-      socket.removeEventListener('message', updateRealtime)
-      socket.close()
       clearTimeout(timeout)
+      if (socket) {
+        socket.removeEventListener('message', updateRealtime)
+        socket.close()
+        socket = null
+      }
     }
   }, [coins])
 

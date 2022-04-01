@@ -4,7 +4,7 @@ import styles from './LoginPage.module.scss'
 import { validateEmail } from 'utils/validation'
 import { getQueryParam } from 'utils/queryString'
 
-function LoginPage() {
+function LoginPage({ key }) {
   const emailInputRef = useRef(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
