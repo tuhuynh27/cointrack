@@ -1,5 +1,5 @@
 import { useReducer, useEffect, useCallback } from 'react'
-import './IndexChart.scss'
+import styles from './IndexChart.module.scss'
 
 import { indexData } from './data'
 
@@ -82,50 +82,50 @@ function IndexChart() {
   }, [dispatch])
 
   return (
-    <div className="index-chart">
+    <div className={styles.indexChart}>
       <table>
         <thead>
           <tr>
-            <th className="index" style={{ width: '5%' }}>#</th>
+            <th className={styles.index} style={{ width: '5%' }}>#</th>
             <th>Name</th>
-            <th className="price" style={{ width: '15%' }}>Price</th>
-            <th className="change" style={{ width: '10%' }}>Change</th>
-            <th className="volume" style={{ width: '10%' }}>Volume</th>
-            <th className="trade" style={{ width: '10%' }}>Track</th>
+            <th className={styles.price} style={{ width: '15%' }}>Price</th>
+            <th className={styles.change} style={{ width: '10%' }}>Change</th>
+            <th className={styles.volume} style={{ width: '10%' }}>Volume</th>
+            <th className={styles.trade} style={{ width: '10%' }}>Track</th>
           </tr>
         </thead>
         <tbody>
           {state.map((coin, index) => <tr key={coin.name}>
-            <td className="index">{index + 1}</td>
+            <td className={styles.index}>{index + 1}</td>
             <td>
-              <div className="coin-name">
-                <img className="logo" alt="Coin Logo" src={coin.logo}/>
-                <div className="title">
+              <div className={styles.coinName}>
+                <img className={styles.logo} alt="Coin Logo" src={coin.logo}/>
+                <div className={styles.title}>
                   <div>{coin.name}</div>
-                  <div className="coin-code">{coin.code}</div>
+                  <div className={styles.coinCode}>{coin.code}</div>
                 </div>
               </div>
             </td>
-            <td className="price" >
+            <td className={styles.price} >
               <div className="desktop">
                 USD {coin.price}
               </div>
-              <div className="mobile">
+              <div className={styles.mobile}>
                 <div>USD {coin.price}</div>
                 <div style={{ color: coin.change > 0 ? 'green' : 'red' }}>
                   {coin.change > 0 ? '+' : ''}{coin.change}%
                 </div>
               </div>
             </td>
-            <td className="change">
+            <td className={styles.change}>
               <div style={{ color: coin.change > 0 ? 'green' : 'red' }}>
                 {coin.change > 0 ? '+' : ''}{coin.change}%
               </div>
             </td>
-            <td className="volume">
+            <td className={styles.volume}>
               {coin.volume}
             </td>
-            <td className="trade">
+            <td className={styles.trade}>
               <button>Track</button>
             </td>
           </tr>)}

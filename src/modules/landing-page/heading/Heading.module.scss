@@ -8,7 +8,7 @@
   padding: 24px;
   margin-bottom: 50px;
 
-  .left-side {
+  .leftSide {
     display: flex;
     flex: 1 1 0%;
     flex-direction: column;
@@ -45,7 +45,7 @@
       }
     }
 
-    .get-start {
+    .getStarted {
       display: flex;
       flex-direction: row;
       gap: 20px;
@@ -75,7 +75,7 @@
     }
   }
 
-  .right-side {
+  .rightSide {
     flex:  1 0;
     svg {
       height: 600px;

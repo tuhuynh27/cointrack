@@ -1,4 +1,4 @@
-import './Navbar.scss'
+import styles from './Navbar.module.scss'
 
 import { Link } from 'react-router-dom'
 
@@ -29,17 +29,17 @@ const menu = [
 
 function Navbar() {
   return (
-    <div className="navbar">
-      <div className="inner">
+    <div className={styles.navbar}>
+      <div className={styles.inner}>
         <Link to="/"><img src={Logo} alt="Logo"/></Link>
-        <div className="menu">
+        <div className={styles.menu}>
           {menu.map(m => (
             <Link to={m.link}><div key={m.link}>{m.text}</div></Link>
           ))}
         </div>
-        <div className="buttons">
-          <button className="sign-in">Sign in</button>
-          <button className="get-started">Get started</button>
+        <div className={styles.buttons}>
+          <button className={styles.signIn}>Sign in</button>
+          <button className={styles.getStarted}>Get started</button>
         </div>
       </div>
     </div>

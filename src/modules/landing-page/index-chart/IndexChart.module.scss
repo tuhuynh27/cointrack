@@ -1,4 +1,4 @@
-.index-chart {
+.indexChart {
   width: calc(100vw - 40px);
   @media screen and (max-width: 559px) {
     width: 100%;
@@ -55,7 +55,7 @@
     td {
       font-size: 18px;
 
-      .coin-name {
+      .coinName {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -71,7 +71,7 @@
             gap: 0;
           }
 
-          .coin-code {
+          .coinCode {
             color: rgb(91,97,110);
           }
         }
