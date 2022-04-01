@@ -119,13 +119,13 @@
     }
 
     .change {
-      @media screen and (max-width: 889px) {
+      @media screen and (max-width: 559px) {
         display: none;
       }
     }
 
     .volume {
-      @media screen and (max-width: 559px) {
+      @media screen and (max-width: 889px) {
         display: none;
       }
     }
