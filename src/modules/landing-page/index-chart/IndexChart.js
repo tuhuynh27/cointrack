@@ -107,7 +107,7 @@ function IndexChart() {
               </div>
             </td>
             <td className={styles.price} >
-              <div className="desktop">
+              <div className={styles.desktop}>
                 USD {coin.price}
               </div>
               <div className={styles.mobile}>

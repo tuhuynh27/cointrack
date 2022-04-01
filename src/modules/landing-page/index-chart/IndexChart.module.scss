@@ -98,6 +98,10 @@
     }
 
     .price {
+      .desktop {
+        display: block;
+      }
+
       .mobile {
         display: none;
       }
