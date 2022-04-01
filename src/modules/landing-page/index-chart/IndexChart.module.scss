@@ -1,3 +1,5 @@
+@import "styles/variables";
+
 .indexChart {
   width: calc(100vw - 40px);
   @media screen and (max-width: 559px) {
@@ -10,7 +12,7 @@
     width: 100%;
     border-style: hidden;
     border-radius: 5px;
-    box-shadow: 0 0 0 1px #f4dfdf;
+    box-shadow: 0 0 0 1px $border-color;
     margin: 0;
     padding: 0;
     border-collapse: collapse;
@@ -21,7 +23,7 @@
     }
 
     tr {
-      border-bottom: 1px solid #f4dfdf;
+      border-bottom: 1px solid $border-color;
       cursor: pointer;
     }
 
@@ -39,7 +41,7 @@
     }
 
     th {
-      color: rgb(91,97,110);
+      color: $secondary-text;
       font-weight: 400;
       font-size: 14px;
 

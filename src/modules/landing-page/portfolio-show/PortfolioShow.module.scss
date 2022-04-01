@@ -1,3 +1,5 @@
+@import "styles/variables";
+
 .portfolioShow {
   width: calc(100vw - 40px);
   @media screen and (max-width: 559px) {
@@ -23,7 +25,7 @@
   }
 
   p {
-    color: rgb(91, 97, 110);
+    color: $secondary-text;
 
     @media screen and (max-width: 559px) {
       padding: 0 30px;
