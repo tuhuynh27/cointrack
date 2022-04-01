@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useReducer } from 'react'
+import { useState, useCallback, useEffect, useReducer } from 'react'
+import { sleep } from 'utils/time'
 
 function reducer(state, action) {
   switch (action.type) {
@@ -19,6 +20,7 @@ function reducer(state, action) {
         if (changesObj[e.code]) {
           return {
             ...e,
+            price: e.price === 0 ? changesObj[e.code].price : e.price,
             change: changesObj[e.code].change,
             volume: changesObj[e.code].volume,
           }
@@ -41,6 +43,7 @@ function init(coins) {
 
 export default function useCoinData(coins) {
   const [state, dispatch] = useReducer(reducer, coins, init)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const loadMeta = useCallback(
     async () => {
@@ -53,12 +56,15 @@ export default function useCoinData(coins) {
         const val = (parseFloat(data.volume) * avg).toFixed(0)
         const volume = (val / 1000000).toFixed(2)
         const volumeStr = volume > 1000 ? `${(volume / 1000).toFixed(2)}B` : `${volume}M`
+        const lastPrice = parseFloat(data.lastPrice)
         obj[e.code] = {
+          price: lastPrice,
           change: change.toFixed(2),
           volume: volumeStr,
         }
       }
       dispatch({ type: 'updateChanges', data: obj })
+      setIsLoaded(true)
     }, [coins]
   )
 
@@ -98,7 +104,8 @@ export default function useCoinData(coins) {
     let socket = null
     let timeout = null
 
-    function connect() {
+    async function connect() {
+      await sleep(500)
       socket = new WebSocket('wss://stream.binance.com:9443/stream?streams=' + connectStr)
       socket.addEventListener('message', updateRealtime)
       socket.addEventListener('error', () => {
@@ -108,7 +115,7 @@ export default function useCoinData(coins) {
       })
     }
 
-    connect()
+    void connect()
 
     return () => {
       clearInterval(interval)
@@ -118,5 +125,5 @@ export default function useCoinData(coins) {
     }
   }, [coins])
 
-  return state
+  return { state, isLoaded }
 }

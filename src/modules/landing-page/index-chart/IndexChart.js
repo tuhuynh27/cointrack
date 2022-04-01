@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from './IndexChart.module.scss'
 
 import { Link } from 'react-router-dom'
@@ -6,20 +7,22 @@ import useCoinData from 'hooks/useCoinData'
 import { indexCoins } from './data'
 
 function IndexChart() {
-  const data = useCoinData(indexCoins)
+  const { state: data, isLoaded } = useCoinData(indexCoins)
 
   const marketStatus = (data.reduce((sum, coin) => sum + parseFloat(coin.change), 0) / data.length)
 
   return (
-    <div className={styles.indexChart}>
+    <div className={styles.indexChart} style={{ display: isLoaded ? 'block' : 'none' }}>
       <div className={styles.marketInfo}>
         <p>In the past 24 hours</p>
-        <h2>Market is {marketStatus >= 0 ? 'up' : 'down'}&nbsp;
-          <span style={{ color: marketStatus >= 0 ? 'green' : 'red' }}>
-            {Math.abs(marketStatus).toFixed(2)}%</span></h2>
+        <h2>Market is&nbsp;
+          {marketStatus >= 0 ? 'up' : 'down'} <span style={{ color: marketStatus >= 0 ? 'green' : 'red' }}>
+            {Math.abs(marketStatus).toFixed(2)}%</span>
+        </h2>
       </div>
-      <table>
-        <thead>
+      {isLoaded && <div className={styles.indexTable}>
+        <table>
+          <thead>
           <tr>
             <th className={styles.index} style={{ width: '5%' }}>#</th>
             <th>Name</th>
@@ -28,8 +31,8 @@ function IndexChart() {
             <th className={styles.volume} style={{ width: '10%' }}>Volume</th>
             <th className={styles.trade} style={{ width: '10%' }}>Track</th>
           </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
           {data.map((coin, index) => <tr key={coin.name}>
             <td className={styles.index}>{index + 1}</td>
             <td>
@@ -43,10 +46,10 @@ function IndexChart() {
             </td>
             <td className={styles.price} >
               <div className={styles.desktop}>
-                {coin.price ? 'USD' : ''} {coin.price > 0 ? coin.price : ''}
+                USD {coin.price}
               </div>
               <div className={styles.mobile}>
-                <div>{coin.price ? 'USD' : ''} {coin.price > 0 ? coin.price : ''}</div>
+                <div>USD {coin.price}</div>
                 <div style={{ color: coin.change > 0 ? 'green' : 'red' }}>
                   {coin.change > 0 ? '+' : ''}{coin.change}%
                 </div>
@@ -64,8 +67,9 @@ function IndexChart() {
               <Link to="/portfolio"><button>Track</button></Link>
             </td>
           </tr>)}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>}
     </div>
   )
 }

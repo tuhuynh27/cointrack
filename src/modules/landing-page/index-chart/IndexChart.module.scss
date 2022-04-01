@@ -28,142 +28,151 @@
     }
   }
 
-  table {
-    width: 100%;
-    border-style: hidden;
-    border-radius: 5px;
-    box-shadow: 0 0 0 1px $border-color;
-    margin: 0;
-    padding: 0;
-    border-collapse: collapse;
-    overflow-x: scroll;
-    @media screen and (max-width: 559px) {
-      border-radius: 0;
-      box-shadow: none;
-    }
+  .indexTable {
+    table {
+      width: 100%;
+      border-style: hidden;
+      border-radius: 5px;
+      box-shadow: 0 0 0 1px $border-color;
+      margin: 0;
+      padding: 0;
+      border-collapse: collapse;
+      overflow-x: scroll;
+      animation: fadeIn 1s;
 
-    tr {
-      border-bottom: 1px solid $border-color;
-      cursor: pointer;
-    }
-
-    tbody {
-      tr {
-        &:hover {
-          background: #fcfafa;
-        }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
       }
-    }
-
-    th, td {
-      text-align: left;
-      padding: 15px 20px;
-    }
-
-    th {
-      color: $secondary-text;
-      font-weight: 400;
-      font-size: 14px;
 
       @media screen and (max-width: 559px) {
-        display: none;
+        border-radius: 0;
+        box-shadow: none;
       }
 
-      &:hover {
-        background: unset;
+      tr {
+        border-bottom: 1px solid $border-color;
+        cursor: pointer;
       }
-    }
 
-    td {
-      font-size: 18px;
+      tbody {
+        tr {
+          &:hover {
+            background: #fcfafa;
+          }
+        }
+      }
 
-      .nameColumn {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 15px;
+      th, td {
+        text-align: left;
+        padding: 15px 20px;
+      }
 
-        .title {
+      th {
+        color: $secondary-text;
+        font-weight: 400;
+        font-size: 14px;
+
+        @media screen and (max-width: 559px) {
+          display: none;
+        }
+
+        &:hover {
+          background: unset;
+        }
+      }
+
+      td {
+        font-size: 18px;
+
+        .nameColumn {
           display: flex;
           flex-direction: row;
-          gap: 20px;
+          align-items: center;
+          gap: 15px;
 
-          @media screen and (max-width: 559px) {
-            flex-direction: column;
-            gap: 0;
+          .title {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+
+            @media screen and (max-width: 559px) {
+              flex-direction: column;
+              gap: 0;
+            }
+
+            .coinName {
+
+            }
+
+            .coinCode {
+              color: rgb(91,97,110);
+            }
           }
 
-          .coinName {
-
-          }
-
-          .coinCode {
-            color: rgb(91,97,110);
+          img.logo {
+            width: 36px;
+            height: 36px;
           }
         }
 
-        img.logo {
-          width: 36px;
-          height: 36px;
+        button {
+          border: 0;
+          background-color: rgb(9,133,81);
+          color: white;
+          font-weight: 500;
+          font-size: 14px;
+          border-radius: 5px;
+          padding: 10px 15px;
         }
       }
 
-      button {
-        border: 0;
-        background-color: rgb(9,133,81);
-        color: white;
-        font-weight: 500;
-        font-size: 14px;
-        border-radius: 5px;
-        padding: 10px 15px;
-      }
-    }
-
-    .price {
-      .desktop {
-        display: block;
-      }
-
-      .mobile {
-        display: none;
-      }
-
-      @media screen and (max-width: 559px) {
-        .mobile {
-          display: block;
-          text-align: right;
-        }
-
+      .price {
         .desktop {
+          display: block;
+        }
+
+        .mobile {
+          display: none;
+        }
+
+        @media screen and (max-width: 559px) {
+          .mobile {
+            display: block;
+            text-align: right;
+          }
+
+          .desktop {
+            display: none;
+          }
+        }
+      }
+
+      .change {
+        @media screen and (max-width: 559px) {
           display: none;
         }
       }
-    }
 
-    .change {
-      @media screen and (max-width: 559px) {
-        display: none;
+      .volume {
+        @media screen and (max-width: 889px) {
+          display: none;
+        }
       }
-    }
 
-    .volume {
-      @media screen and (max-width: 889px) {
-        display: none;
+      .index {
+        text-align: center;
+        color: rgb(91,97,110);
+
+        @media screen and (max-width: 559px) {
+          display: none;
+        }
       }
-    }
 
-    .index {
-      text-align: center;
-      color: rgb(91,97,110);
-
-      @media screen and (max-width: 559px) {
-        display: none;
-      }
-    }
-
-    .trade {
-      @media screen and (max-width: 559px) {
-        display: none;
+      .trade {
+        @media screen and (max-width: 559px) {
+          display: none;
+        }
       }
     }
   }
