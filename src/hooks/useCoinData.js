@@ -63,11 +63,12 @@ export default function useCoinData(coins) {
   )
 
   useEffect(() => {
-    setTimeout(() => void loadMeta(), 1000)
+    const timeout = setTimeout(() => void loadMeta(), 1000)
     const interval = setInterval(() => {
       void loadMeta()
     }, 5000)
     return () => {
+      clearTimeout(timeout)
       clearInterval(interval)
     }
   }, [loadMeta])
@@ -95,6 +96,7 @@ export default function useCoinData(coins) {
     const listWatchStream = coins.map(e =>`${e.code.toLowerCase()}usdt@aggTrade`)
     const connectStr = listWatchStream.join('/')
     let socket = null
+    let timeout = null
 
     function connect() {
       socket = new WebSocket('wss://stream.binance.com:9443/stream?streams=' + connectStr)
@@ -102,7 +104,7 @@ export default function useCoinData(coins) {
       socket.addEventListener('error', () => {
         socket.close()
         socket = null
-        setTimeout(() => connect(), 1000)
+        timeout = setTimeout(() => connect(), 1000)
       })
     }
 
@@ -112,6 +114,7 @@ export default function useCoinData(coins) {
       clearInterval(interval)
       socket.removeEventListener('message', updateRealtime)
       socket.close()
+      clearTimeout(timeout)
     }
   }, [coins])
 

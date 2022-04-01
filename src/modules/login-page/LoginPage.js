@@ -60,12 +60,16 @@ function LoginPage() {
         <form className={styles.loginForm} onSubmit={handleSubmit}>
           <div className={styles.inputElement}>
             <label htmlFor="email">Email</label>
-            <input className={emailError.length ? styles.error : null} id="email" value={email} onChange={handleInputChange} ref={emailInputRef} />
+            <input className={emailError.length ? styles.error : null} id="email"
+                   autoComplete="email"
+                   value={email} onChange={handleInputChange} ref={emailInputRef} />
             {emailError.length ? <p className={styles.errorMessage}>{emailError}</p> : null}
           </div>
           <div className={styles.inputElement}>
             <label htmlFor="password">Password</label>
-            <input className={passwordError.length ? styles.error : null} id="password" type="password" value={password} onChange={handleInputChange} />
+            <input className={passwordError.length ? styles.error : null} id="password" type="password"
+                   autoComplete="current-password"
+                   value={password} onChange={handleInputChange} />
             {passwordError.length ? <p className={styles.errorMessage}>{passwordError}</p> : null}
           </div>
           <div className={styles.buttonGroup}>
