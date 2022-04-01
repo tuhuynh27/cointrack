@@ -11,6 +11,7 @@ import LandingPage from './modules/landing-page/LandingPage'
 import LoginPage from './modules/login-page/LoginPage'
 import NotFoundPage from './modules/not-found-page/NotFoundPage'
 import RequireAuth from './components/auth/RequireAuth'
+import MarketUpdatesPage from './modules/market-updates-page/MarketUpdatesPage'
 
 export default function App() {
   return (
@@ -30,15 +31,11 @@ export default function App() {
                      <NotFoundPage/>
                    </RequireAuth>}/>
             <Route path="/pnl"
-                   element={<RequireAuth>
-                     <NotFoundPage/>
-                   </RequireAuth>}/>
-            <Route path="/bot-trading"
-                   element={<RequireAuth>
-                     <NotFoundPage/>
-                   </RequireAuth>}/>
-            <Route path="/market-updates"
                    element={<NotFoundPage/>}/>
+            <Route path="/bot-trading"
+                   element={<NotFoundPage/>}/>
+            <Route path="/market-updates"
+                   element={<MarketUpdatesPage/>}/>
             <Route path="*" element={<NotFoundPage/>} />
           </Routes>
         </div>
