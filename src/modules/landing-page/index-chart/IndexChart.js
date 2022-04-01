@@ -35,10 +35,10 @@ function IndexChart() {
             </td>
             <td className={styles.price} >
               <div className={styles.desktop}>
-                USD {coin.price}
+                {coin.price ? 'USD' : ''} {coin.price > 0 ? coin.price : ''}
               </div>
               <div className={styles.mobile}>
-                <div>USD {coin.price}</div>
+                <div>{coin.price ? 'USD' : ''} {coin.price > 0 ? coin.price : ''}</div>
                 <div style={{ color: coin.change > 0 ? 'green' : 'red' }}>
                   {coin.change > 0 ? '+' : ''}{coin.change}%
                 </div>
