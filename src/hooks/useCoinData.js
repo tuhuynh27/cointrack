@@ -39,25 +39,6 @@ function init(coins) {
   }))
 }
 
-// Batch changes
-function useContainer(actionType) {
-  let data = Object.create(null)
-  function update(code, val) {
-    data[code] = val
-  }
-  function flushDataToStore(dispatch) {
-    dispatch({
-      type: actionType,
-      data,
-    })
-    data = Object.create(null)
-  }
-  return { update, flushDataToStore }
-}
-
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const priceDataContainer = useContainer('updatePrices')
-
 export default function useCoinData(coins) {
   const [state, dispatch] = useReducer(reducer, coins, init)
 
@@ -92,29 +73,28 @@ export default function useCoinData(coins) {
   }, [loadMeta])
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      priceDataContainer.flushDataToStore(dispatch)
-    }, 500)
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
-
-  useEffect(() => {
     const listWatchStream = coins.map(e =>`${e.code.toLowerCase()}usdt@aggTrade`)
     const connectStr = listWatchStream.join('/')
     const socket = new WebSocket('wss://stream.binance.com:9443/stream?streams=' + connectStr)
+    let obj = Object.create(null)
     function updateRealtime(e) {
       const payload = JSON.parse(e.data)
       const { stream, data } = payload
       const priceFloat = parseFloat(data.p)
       const price = priceFloat.toFixed(2)
       const code = stream.substring(0, 3).toUpperCase()
-
-      priceDataContainer.update(code, price)
+      obj[code] = price
     }
+    const interval = setInterval(() => {
+      dispatch({
+        type: 'updatePrices',
+        data: obj,
+      })
+      obj = Object.create(null)
+    }, 500)
     socket.addEventListener('message', updateRealtime)
     return () => {
+      clearInterval(interval)
       socket.removeEventListener('message', updateRealtime)
       socket.close()
     }
