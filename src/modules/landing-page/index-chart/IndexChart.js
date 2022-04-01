@@ -7,12 +7,12 @@ import useCoinData from 'hooks/useCoinData'
 import { indexCoins } from './data'
 
 function IndexChart() {
-  const { state: data, isLoaded } = useCoinData(indexCoins)
+  const { state: data } = useCoinData(indexCoins)
 
   const marketStatus = (data.reduce((sum, coin) => sum + parseFloat(coin.change), 0) / data.length)
 
   return (
-    <div className={styles.indexChart} style={{ display: isLoaded ? 'block' : 'none' }}>
+    <div className={styles.indexChart}>
       <div className={styles.marketInfo}>
         <p>In the past 24 hours</p>
         <h2>Market is&nbsp;
@@ -20,7 +20,7 @@ function IndexChart() {
             {Math.abs(marketStatus).toFixed(2)}%</span>
         </h2>
       </div>
-      {isLoaded && <div className={styles.indexTable}>
+      <div className={styles.indexTable}>
         <table>
           <thead>
           <tr>
@@ -69,7 +69,7 @@ function IndexChart() {
           </tr>)}
           </tbody>
         </table>
-      </div>}
+      </div>
     </div>
   )
 }

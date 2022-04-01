@@ -3,7 +3,8 @@ import styles from './App.module.scss'
 import {
   BrowserRouter,
   Routes,
-  Route
+  Route,
+  useLocation
 } from 'react-router-dom'
 
 import Navbar from './components/navbar/Navbar'
@@ -13,11 +14,14 @@ import NotFoundPage from './modules/not-found-page/NotFoundPage'
 import RequireAuth from './components/auth/RequireAuth'
 import MarketUpdatesPage from './modules/market-updates-page/MarketUpdatesPage'
 
-export default function App() {
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
+
+function Router() {
+  const location = useLocation();
+
   return (
-    <BrowserRouter>
-      <div className={styles.app}>
-        <Navbar/>
+    <TransitionGroup component={null}>
+      <CSSTransition key={location.key} classNames="fade" timeout={300}>
         <div className={styles.outlet}>
           <Routes>
             <Route exact path="/" element={<LandingPage/>}/>
@@ -39,6 +43,17 @@ export default function App() {
             <Route path="*" element={<NotFoundPage/>} />
           </Routes>
         </div>
+      </CSSTransition>
+    </TransitionGroup>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <div className={styles.app}>
+        <Navbar/>
+        <Router/>
       </div>
     </BrowserRouter>
   )
