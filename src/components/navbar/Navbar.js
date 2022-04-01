@@ -39,7 +39,7 @@ function Navbar() {
     <React.Fragment>
       <div className={styles.navbar}>
         <div className={styles.inner}>
-          <Link to="/"><img src={Logo} alt="Logo"/></Link>
+          <Link to="/" onClick={() => setIsMobileMenuOpen(false)}><img src={Logo} alt="Logo"/></Link>
           <div className={styles.menu}>
             {menu.map(m => (
               <Link to={m.link} key={m.link}><div>{m.text}</div></Link>
