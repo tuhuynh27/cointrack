@@ -42,3 +42,29 @@ button {
   opacity: 1;
   transition: opacity 250ms ease-out, transform 300ms ease;
 }
+
+// Mobile menu animation
+.mobile-menu-enter-active {
+  animation: slide-down 300ms forwards;
+}
+.mobile-menu-exit-active {
+  animation: slide-up 300ms forwards;
+}
+
+@keyframes slide-down {
+  from {
+    transform: translate(0, -50%);
+  }
+  to {
+    transform: translate(0, 0%);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translate(0, 0%);
+  }
+  to {
+    transform: translate(0, -100%);
+  }
+}
