@@ -4,6 +4,8 @@ import styles from './LoginPage.module.scss'
 import { validateEmail } from 'utils/validation'
 import { getQueryParam } from 'utils/queryString'
 
+import { toast } from 'utils/toast'
+
 function LoginPage({ key }) {
   const emailInputRef = useRef(null)
   const [email, setEmail] = useState('')
@@ -74,7 +76,9 @@ function LoginPage({ key }) {
           </div>
           <div className={styles.buttonGroup}>
             <button disabled={isLoading} className={isLoading ? styles.loading : null} onClick={handleSubmit} type="submit">Continue</button>
-            <button className={styles.secondaryButton} type="button">Create account</button>
+            <button onClick={() =>
+              toast('We\'re having connection trouble. Please try again.')}
+                    className={styles.secondaryButton} type="button">Create account</button>
           </div>
         </form>
       </div>

@@ -1,33 +1,44 @@
-let toasts = 0
+let wrapper = null
+const defaultOptions = { ms: 2000, disableClose: false, type: 'info' }
 
-export function toast(msg, ms) {
-  const wrapperDiv = document.createElement('div')
-  wrapperDiv.className = 'toast'
-  wrapperDiv.style.top = 75 + toasts * 55 + 'px'
+export function toast(msg, options = defaultOptions) {
+  if (wrapper === null) {
+    wrapper = document.createElement('div')
+    wrapper.className = 'toasts'
+    document.body.appendChild(wrapper)
+  }
+
   const innerDiv = document.createElement('div')
-  innerDiv.className = 'msg'
+  innerDiv.className = 'toast'
   innerDiv.innerHTML = msg
-  wrapperDiv.appendChild(innerDiv)
+  wrapper.appendChild(innerDiv)
   const xDiv = document.createElement('div')
-  xDiv.className = 'x'
+  xDiv.className = 'x-button'
   xDiv.innerHTML = '✕'
   innerDiv.appendChild(xDiv)
-  document.body.appendChild(wrapperDiv)
-  toasts++
 
-  const timeout = setTimeout(() => {
+  const autoCloseTimeout = setTimeout(() => {
     removeToast()
-  }, ms)
+  }, options.ms)
 
-  function handlerClose() {
+  function closeToastHandler() {
     removeToast()
-    clearTimeout(timeout)
+    clearTimeout(autoCloseTimeout)
   }
 
   function removeToast() {
-    document.body.removeChild(wrapperDiv)
-    toasts--
+    if (wrapper.contains(innerDiv)) {
+      wrapper.removeChild(innerDiv)
+    }
+    if (wrapper.childNodes.length === 0) {
+      wrapper.parentNode.removeChild(wrapper)
+      wrapper = null
+    }
   }
 
-  xDiv.addEventListener('click', handlerClose)
+  xDiv.addEventListener('click', closeToastHandler)
+
+  if (options.disableClose) {
+    xDiv.style.display = 'none'
+  }
 }
