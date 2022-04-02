@@ -7,7 +7,6 @@ function MobileAppIconSvg() {
     viewBox="0 0 680 956"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="HeroVariant__HeroImage-sc-1o7093z-6 PCcMF"
   >
     <circle cx="340" cy="428" r="340" fill="#F1F5FE"/>
     <g filter="url(#prefix__filter0_dd)">
@@ -28,7 +27,6 @@ function MobileAppIconSvg() {
       <g filter="url(#prefix__filter2_f)">
         <path
           d="M465.5 15c38.883 0 67.5 23.943 67.5 61.343V783c0 20.5-11.5 57-65.5 57"
-          stroke="url(#prefix__paint2_radial)"
         />
       </g>
     </g>
@@ -128,8 +126,8 @@ function MobileAppIconSvg() {
         gradientUnits="userSpaceOnUse"
         gradientTransform="matrix(286.75008 212.24974 -632.54832 854.57482 179.75 390.25)"
       >
-        <stop stopOpacity="0.2"></stop>
-        <stop offset="1" stopOpacity="0"></stop>
+        <stop stopOpacity="0.2"/>
+        <stop offset="1" stopOpacity="0"/>
       </radialGradient>
       <radialGradient
         id="prefix__paint2_radial"
@@ -139,9 +137,9 @@ function MobileAppIconSvg() {
         gradientUnits="userSpaceOnUse"
         gradientTransform="matrix(0 756.5 -2254.52 0 499 131)"
       >
-        <stop stopOpacity="0"></stop>
-        <stop offset="0.453" stopOpacity="0.2"></stop>
-        <stop offset="1" stopOpacity="0"></stop>
+        <stop stopOpacity="0"/>
+        <stop offset="0.453" stopOpacity="0.2"/>
+        <stop offset="1" stopOpacity="0"/>
       </radialGradient>
       <linearGradient
         id="prefix__paint0_linear"

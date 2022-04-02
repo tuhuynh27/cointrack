@@ -11,7 +11,7 @@
   }
 
   .headLine {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 500;
   }
 
@@ -21,7 +21,7 @@
   }
 
   .backButton {
-    margin-top: 20px;
+    margin-top: 10px;
 
     button {
       margin: 0;
@@ -29,6 +29,9 @@
       border: 1px solid #333;
       border-radius: 4px;
       background-color: white;
+      text-decoration: none;
+      color: black;
+      font-size: 14px;
     }
   }
 }

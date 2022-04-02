@@ -25,7 +25,7 @@ function Router() {
   }, [location.pathname]);
 
   return (
-    <TransitionGroup component={null}>
+    <TransitionGroup>
       <CSSTransition key={location.pathname} exit={false} classNames="fade" timeout={300}>
         <div className={styles.outlet}>
           <Routes>
