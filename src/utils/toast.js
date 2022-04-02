@@ -30,6 +30,7 @@ export function toast(msg, options = defaultOptions) {
   }
 
   function removeToast() {
+    xDiv.removeEventListener('click', closeToastHandler)
     if (wrapper.contains(innerDiv)) {
       wrapper.removeChild(innerDiv)
     }

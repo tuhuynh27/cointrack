@@ -47,7 +47,8 @@ function Navbar() {
           </div>
           <div className={styles.buttons}>
             <Link to='/login'><button className={styles.signIn}>Sign in</button></Link>
-            <Link to='/login'><button className={styles.getStarted}>Get started</button></Link>
+            <Link to='/login' onClick={() => setIsMobileMenuOpen(false)}>
+              <button className={styles.getStarted}>Get started</button></Link>
             <div className={styles.mobileMenuButton}>
               <div className={isMobileMenuOpen ? styles.closeButton : styles.openButton} onClick={toggleMobileMenu}>
               </div>
