@@ -3,7 +3,7 @@ import styles from './Heading.module.scss'
 
 import { useNavigate } from 'react-router-dom'
 
-import MobileAppIconSvg from 'modules/svg/MobileAppIconSvg'
+import mobileAppIconSvg from 'modules/svg/mobileAppIcon.svg'
 
 function Heading() {
   const navigate = useNavigate();
@@ -28,7 +28,9 @@ function Heading() {
         </form>
       </div>
       <div className={styles.rightSide}>
-        <MobileAppIconSvg />
+        <object type="image/svg+xml" className={styles.svg} data={mobileAppIconSvg}>
+          Your browser does not support SVG
+        </object>
       </div>
     </div>
   )
