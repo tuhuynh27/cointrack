@@ -18,11 +18,11 @@ import MarketUpdatesPage from './modules/market-updates-page/MarketUpdatesPage'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 function Router() {
-  const location = useLocation();
+  const location = useLocation()
 
   useLayoutEffect(() => {
-    document.documentElement.scrollTo(0, 0);
-  }, [location.pathname]);
+    document.documentElement.scrollTo(0, 0)
+  }, [location.pathname])
 
   return (
     <TransitionGroup>

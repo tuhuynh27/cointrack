@@ -67,7 +67,7 @@ function Navbar() {
               <Link to={m.link} key={m.link} onClick={toggleMobileMenu}><div>{m.text}</div></Link>
             ))}
           </div>
-          <div className={styles.buttonList}>
+          <div className={styles.mobileButtons}>
             <button className={styles.getStarted} onClick={toggleMobileMenu}>Get started</button>
             <button className={styles.signIn} onClick={toggleMobileMenu}>Sign in</button>
           </div>
