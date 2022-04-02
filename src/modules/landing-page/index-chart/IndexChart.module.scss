@@ -17,7 +17,7 @@
     }
 
     p {
-      color: $secondary-text;
+      color: var(--secondary-text);
       font-size: 14px;
       font-weight: 500;
     }
@@ -33,7 +33,7 @@
       width: 100%;
       border-style: hidden;
       border-radius: 5px;
-      box-shadow: 0 0 0 1px $border-color;
+      box-shadow: 0 0 0 1px var(--border-color);
       margin: 0;
       padding: 0;
       border-collapse: collapse;
@@ -50,7 +50,7 @@
       }
 
       tr {
-        border-bottom: 1px solid $border-color;
+        border-bottom: 1px solid var(--border-color);
         cursor: pointer;
       }
 
@@ -68,7 +68,7 @@
       }
 
       th {
-        color: $secondary-text;
+        color: var(--secondary-text);
         font-weight: 400;
         font-size: 14px;
 

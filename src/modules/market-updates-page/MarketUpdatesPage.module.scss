@@ -27,7 +27,7 @@
     }
 
     p {
-      color: $secondary-text;
+      color: var(--secondary-text);
     }
   }
 
@@ -61,7 +61,7 @@
         text-decoration: none;
 
         &:hover {
-          color: $primary-text;
+          color: var(--primary-text);
         }
       }
 

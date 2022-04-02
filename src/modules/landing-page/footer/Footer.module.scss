@@ -5,14 +5,14 @@
     text-align: center;
     margin: 0;
     padding: 0 20px;
-    color: $secondary-text;
+    color: var(--secondary-text);
 
     &:last-child {
       margin-bottom: 25px;
     }
 
     a {
-      color: $secondary-text;
+      color: var(--secondary-text);
       text-decoration: none;
       font-weight: 500;
     }

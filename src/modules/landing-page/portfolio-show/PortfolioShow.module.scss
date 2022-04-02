@@ -25,7 +25,7 @@
   }
 
   p {
-    color: $secondary-text;
+    color: var(--secondary-text);
 
     @media screen and (max-width: 559px) {
       padding: 0 30px;

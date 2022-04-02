@@ -63,7 +63,7 @@
         flex: 2.5;
         font-size: 20px;
         padding: 20px;
-        border: 1px solid $border-color;
+        border: 1px solid var(--border-color);
       }
 
       button {
@@ -71,7 +71,7 @@
         flex: 1;
         font-size: 16px;
         font-weight: 500;
-        background-color: $primary-color;
+        background-color: var(--primary-color);
         color: white;
         border: 1px solid transparent;
         padding: 25px;
