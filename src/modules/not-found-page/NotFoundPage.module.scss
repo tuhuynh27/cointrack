@@ -6,6 +6,10 @@
   gap: 10px;
   margin-top: 50px;
 
+  @media (max-width: 559px) {
+    margin-top: 0;
+  }
+
   div {
     padding: 0 20px;
   }
@@ -18,6 +22,7 @@
   .description {
     font-size: 16px;
     font-weight: 400;
+    text-align: center;
   }
 
   .backButton {
