@@ -1,0 +1,41 @@
+.toast {
+  z-index: 3000;
+  position: fixed;
+  top: 75px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  cursor: pointer;
+
+  .msg {
+    width: 100%;
+    max-width: 559px;
+    text-align: center;
+    border: 0;
+    border-radius: 5px;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 12.5px 10px;
+    margin: 0 20px;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+
+    .x {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+  }
+
+  animation: fadeIn 0.1s ease-in-out;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}

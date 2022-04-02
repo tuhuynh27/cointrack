@@ -3,6 +3,7 @@ import styles from './Navbar.module.scss'
 
 import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
+import { toast } from 'utils/toast'
 
 import Logo from 'assets/img/logo.png'
 
@@ -47,7 +48,8 @@ function Navbar() {
           </div>
           <div className={styles.buttons}>
             <Link to='/login'><button className={styles.signIn}>Sign in</button></Link>
-            <Link to='/login'><button className={styles.getStarted}>Get started</button></Link>
+            <button className={styles.getStarted} onClick={() =>
+              toast('Cannot create account now!', 2000)}>Get started</button>
             <div className={styles.mobileMenuButton}>
               <div className={isMobileMenuOpen ? styles.closeButton : styles.openButton} onClick={toggleMobileMenu}>
               </div>

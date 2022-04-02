@@ -37,11 +37,6 @@
       border-collapse: collapse;
       overflow-x: scroll;
 
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-
       @media screen and (max-width: 559px) {
         border-radius: 0;
         box-shadow: none;
