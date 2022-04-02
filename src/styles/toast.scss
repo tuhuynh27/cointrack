@@ -10,25 +10,32 @@
   gap: 10px;
   cursor: pointer;
 
+  @media (max-width: 559px) {
+    align-items: center;
+  }
+
   .toast {
-    width: 80%;
-    max-width: 559px;
-    text-align: center;
     border: 0;
     border-radius: 5px;
     background: #484848;
     color: #fff;
     padding: 12.5px 10px;
-    margin-right: 20px;
-    font-size: 16px;
-    font-weight: 500;
-    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 0 20px;
+
+    .msg {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+    }
 
     .x-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 20px;
+      font-family: sans-serif;
+      font-size: 16px;
       font-weight: 500;
       cursor: pointer;
     }

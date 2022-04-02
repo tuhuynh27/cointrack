@@ -10,8 +10,11 @@ export function toast(msg, options = defaultOptions) {
 
   const innerDiv = document.createElement('div')
   innerDiv.className = 'toast'
-  innerDiv.innerHTML = msg
   wrapper.appendChild(innerDiv)
+  const msgDiv = document.createElement('div')
+  msgDiv.className = 'msg'
+  msgDiv.innerText = msg
+  innerDiv.appendChild(msgDiv)
   const xDiv = document.createElement('div')
   xDiv.className = 'x-button'
   xDiv.innerHTML = '✕'
