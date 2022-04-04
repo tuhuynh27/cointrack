@@ -27,6 +27,8 @@
     gap: 10px;
     margin: 0 20px;
 
+    animation: fadeIn 0.2s ease-in-out;
+
     .msg {
       text-align: center;
       font-size: 16px;
@@ -40,8 +42,6 @@
       cursor: pointer;
     }
   }
-
-  animation: fadeIn 0.1s ease-in-out;
 
   @keyframes fadeIn {
     from { opacity: 0; }
