@@ -23,6 +23,8 @@ function reducer(state, action) {
             price: e.price === 0 ? changesObj[e.code].price : e.price,
             change: changesObj[e.code].change,
             volume: changesObj[e.code].volume,
+            highPrice: changesObj[e.code].highPrice,
+            lowPrice: changesObj[e.code].lowPrice,
           }
         }
         return e
@@ -38,6 +40,8 @@ function init(coins) {
     price: 0,
     change: 0,
     volume: 0,
+    highPrice: 0,
+    lowPrice: 0,
   }))
 }
 
@@ -53,14 +57,18 @@ export default function useCoinData(coins) {
         const data = await resp.json()
         const change = parseFloat(data.priceChangePercent)
         const avg = (parseFloat(data.highPrice) + parseFloat(data.lowPrice)) / 2
-        const val = (parseFloat(data.volume) * avg).toFixed(0)
-        const volume = (val / 1000000).toFixed(2)
+        const rawVolume = (parseFloat(data.volume) * avg).toFixed(0)
+        const volume = (rawVolume / 1000000).toFixed(2)
         const volumeStr = volume > 1000 ? `${(volume / 1000).toFixed(2)}B` : `${volume}M`
         const lastPrice = parseFloat(data.lastPrice)
+        const highPrice = parseFloat(data.highPrice).toFixed(2)
+        const lowPrice = parseFloat(data.lowPrice).toFixed(2)
         obj[e.code] = {
           price: lastPrice,
           change: change.toFixed(2),
           volume: volumeStr,
+          highPrice: highPrice,
+          lowPrice: lowPrice,
         }
       }
       dispatch({ type: 'updateChanges', data: obj })
@@ -103,16 +111,18 @@ export default function useCoinData(coins) {
     const connectStr = listWatchStream.join('/')
     let socket = null
     let timeout = null
+    function reconnect(e) {
+      socket.close()
+      socket = null
+      timeout = setTimeout(() => connect(), 1000)
+    }
 
     async function connect() {
       await sleep(500)
       socket = new WebSocket('wss://stream.binance.com:9443/stream?streams=' + connectStr)
       socket.addEventListener('message', updateRealtime)
-      socket.addEventListener('error', () => {
-        socket.close()
-        socket = null
-        timeout = setTimeout(() => connect(), 1000)
-      })
+      socket.addEventListener('error', reconnect)
+      socket.addEventListener('close', reconnect)
     }
 
     void connect()
@@ -122,6 +132,8 @@ export default function useCoinData(coins) {
       clearTimeout(timeout)
       if (socket) {
         socket.removeEventListener('message', updateRealtime)
+        socket.removeEventListener('error', reconnect)
+        socket.removeEventListener('close', reconnect)
         socket.close()
         socket = null
       }

@@ -77,7 +77,7 @@ function LoginPage() {
           <div className={styles.buttonGroup}>
             <button disabled={isLoading} className={isLoading ? styles.loading : null} onClick={handleSubmit} type="submit">Continue</button>
             <button onClick={() =>
-              toast('We\'re having connection trouble. Please try again.')}
+              toast(`Now we're only open to beta testers, if you're interested in beta access, please contact us at beta@cointrack.me`)}
                     className={styles.secondaryButton} type="button">Create account</button>
           </div>
         </form>
