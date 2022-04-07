@@ -6,7 +6,7 @@ import { getQueryParam } from 'utils/queryString'
 
 import { toast } from 'utils/toast'
 
-function LoginPage({ key }) {
+function LoginPage() {
   const emailInputRef = useRef(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
