@@ -5,8 +5,8 @@ import { validateEmail } from 'utils/validation'
 import { getQueryParam } from 'utils/queryString'
 
 import { toast } from 'utils/toast'
-import { useDispatch } from 'react-redux'
-import { setProfile } from 'modules/profile/profileSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectProfile, setProfile } from 'modules/profile/profileSlice'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 function LoginPage() {
@@ -16,9 +16,16 @@ function LoginPage() {
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const profile = useSelector(selectProfile)
   const location = useLocation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (profile.isLoggedIn && location.pathname === '/login') {
+      navigate('/')
+    }
+  }, [location.pathname, navigate, profile.isLoggedIn])
 
   useEffect(() => {
     if (emailInputRef.current) {

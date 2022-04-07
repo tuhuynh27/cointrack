@@ -60,7 +60,7 @@ function Navbar() {
                 <button className={styles.getStarted}>Get started</button></Link>
             </RenderIf>
             <RenderIf value={profile.isLoggedIn}>
-              <Link to='/login' onClick={() => setIsMobileMenuOpen(false)}>
+              <Link to='/portfolio' onClick={() => setIsMobileMenuOpen(false)}>
                 <button className={styles.getStarted}>Check PnL</button></Link>
               <div className={styles.avatarSection}>
                 <img onClick={() => setProfileDropdownOpen(t => !t)}
@@ -69,7 +69,10 @@ function Navbar() {
                      src="https://www.svgrepo.com/show/58069/down-arrow.svg" alt="Down"/>
                 {profileDropdownOpen && <div className={styles.dropdownMenu}>
                   <div>Profile Page</div>
-                  <div onClick={() => dispatch(logout())}>Logout</div>
+                  <div onClick={() => {
+                    dispatch(logout())
+                    setProfileDropdownOpen(false)
+                  }}>Logout</div>
                 </div>}
               </div>
             </RenderIf>

@@ -19,7 +19,9 @@ function LandingPage() {
         <Heading/>
       </RenderIf>
       <RenderIf value={profile.isLoggedIn}>
-        <h2 className={styles.greeting}>Welcome back, {profile.email}</h2>
+        <div className={styles.greeting}>
+          <h1>Welcome back, {profile.email}</h1>
+        </div>
       </RenderIf>
       <IndexTable/>
       <RenderIf value={!profile.isLoggedIn}>

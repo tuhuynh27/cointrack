@@ -29,6 +29,7 @@ export const profileSlice = createSlice({
     logout: (state) => {
       state.isLoggedIn = false
       state.email = null
+      saveToLocalStorage({ isLoggedIn: false, email: null })
     },
   },
 })

@@ -1,5 +1,13 @@
 .greeting {
   margin: 50px 20px;
-  font-size: 22px;
-  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0;
+  }
 }

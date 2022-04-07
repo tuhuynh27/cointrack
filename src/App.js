@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import styles from './App.module.scss'
 
 import {
@@ -17,8 +17,64 @@ import MarketUpdatesPage from './modules/market-updates-page/MarketUpdatesPage'
 
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
+const routes = [
+  {
+    path: '/',
+    title: 'Home',
+    exact: true,
+    element: <LandingPage/>
+  },
+  {
+    path: '/login',
+    title: 'Login',
+    element: <LoginPage/>
+  },
+  {
+    path: '/portfolio',
+    title: 'Portfolio',
+    element: (
+      <RequireAuth>
+        <NotFoundPage />
+      </RequireAuth>
+    )
+  },
+  {
+    path: '/transactions',
+    title: 'Transactions',
+    element: (
+      <RequireAuth>
+        <NotFoundPage />
+      </RequireAuth>
+    )
+  },
+  {
+    path: '/pnl',
+    title: 'PNL',
+    element: <NotFoundPage/>
+  },
+  {
+    path: '/bot-trading',
+    title: 'Bot Trading',
+    element: <NotFoundPage/>
+  },
+  {
+    path: '/market-updates',
+    title: 'Market Updates',
+    element: <MarketUpdatesPage/>
+  },
+  {
+    path: '*',
+    title: 'Not Found',
+    element: <NotFoundPage/>
+  }
+]
+
 function Router() {
   const location = useLocation()
+
+  useEffect(() => {
+    document.title = (routes.find(route => route.path === location.pathname).title || 'Cointrack') + ' - Cointrack'
+  }, [location.pathname])
 
   useLayoutEffect(() => {
     document.documentElement.scrollTo(0, 0)
@@ -29,23 +85,9 @@ function Router() {
       <CSSTransition key={location.pathname} exit={false} classNames="fade" timeout={300}>
         <div className={styles.outlet}>
           <Routes>
-            <Route exact path="/" element={<LandingPage/>}/>
-            <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/portfolio"
-                   element={<RequireAuth>
-                     <NotFoundPage/>
-                   </RequireAuth>}/>
-            <Route path="/transactions"
-                   element={<RequireAuth>
-                     <NotFoundPage/>
-                   </RequireAuth>}/>
-            <Route path="/pnl"
-                   element={<NotFoundPage/>}/>
-            <Route path="/bot-trading"
-                   element={<NotFoundPage/>}/>
-            <Route path="/market-updates"
-                   element={<MarketUpdatesPage/>}/>
-            <Route path="*" element={<NotFoundPage/>} />
+            {routes.map(route => (
+              <Route key={route.path} {...route} />
+            ))}
           </Routes>
         </div>
       </CSSTransition>
