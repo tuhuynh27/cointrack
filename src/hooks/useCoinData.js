@@ -45,8 +45,8 @@ function init(coins) {
   }))
 }
 
-export default function useCoinData(coins) {
-  const [state, dispatch] = useReducer(reducer, coins, init)
+export default function useCoinData(coins, limit = 0) {
+  const [state, dispatch] = useReducer(reducer, limit !== 0 ? coins.slice(0, limit) : coins, init)
   const [isLoaded, setIsLoaded] = useState(false)
 
   const loadMeta = useCallback(

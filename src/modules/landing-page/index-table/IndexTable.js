@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import useCoinData from 'hooks/useCoinData'
 import { indexCoins } from './data'
 import PriceTable from 'components/price-table/PriceTable'
+import { useSelector } from 'react-redux'
+import { selectProfile } from '../../profile/profileSlice'
 
 const tableOptions = {
   displayIndex: true,
@@ -39,7 +41,8 @@ const columnData = [
 ]
 
 function IndexTable() {
-  const { state: data } = useCoinData(indexCoins)
+  const profile = useSelector(selectProfile)
+  const { state: data } = useCoinData(indexCoins, profile.isLoggedIn ? 0 : 4)
 
   const marketStatus = (data.reduce((sum, coin) => sum + parseFloat(coin.change), 0) / data.length)
 
