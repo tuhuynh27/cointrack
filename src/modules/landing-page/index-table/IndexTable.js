@@ -7,42 +7,42 @@ import useCoinData from 'hooks/useCoinData'
 import { indexCoins } from './data'
 import PriceTable from 'components/price-table/PriceTable'
 
+const tableOptions = {
+  displayIndex: true,
+}
+
+const columnData = [
+  {
+    name: 'Price',
+    selector: 'price',
+    isPrimary: true,
+    prefix: 'USD',
+  },
+  {
+    name: 'Change',
+    render: (coin) => (
+      <div style={{ color: coin.change > 0 ? 'green' : 'red' }}>
+        {coin.change > 0 ? '+' : ''}{coin.change}%
+      </div>
+    ),
+    isSecondary: true,
+  },
+  {
+    name: 'Volume',
+    selector: 'volume',
+  },
+  {
+    name: 'Track',
+    render: (coin) => (
+      <Link to={`/portfolio/${coin.code}`}><button>Track</button></Link>
+    ),
+  }
+]
+
 function IndexTable() {
   const { state: data } = useCoinData(indexCoins)
 
   const marketStatus = (data.reduce((sum, coin) => sum + parseFloat(coin.change), 0) / data.length)
-
-  const tableOptions = {
-    displayIndex: true,
-  }
-
-  const columnData = [
-    {
-      name: 'Price',
-      selector: 'price',
-      isPrimary: true,
-      prefix: 'USD',
-    },
-    {
-      name: 'Change',
-      render: (coin) => (
-        <div style={{ color: coin.change > 0 ? 'green' : 'red' }}>
-          {coin.change > 0 ? '+' : ''}{coin.change}%
-        </div>
-      ),
-      isSecondary: true,
-    },
-    {
-      name: 'Volume',
-      selector: 'volume',
-    },
-    {
-      name: 'Track',
-      render: (coin) => (
-        <Link to={`/portfolio/${coin.code}`}><button>Track</button></Link>
-      ),
-    }
-  ]
 
   return (
     <div className={styles.indexChart}>

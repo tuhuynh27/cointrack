@@ -34,17 +34,13 @@ function DataCell({ columnData, column, coin }) {
     )
   }
 
-  return (
-    <CellValue column={column} coin={coin}/>
-  )
+  return <CellValue column={column} coin={coin}/>
 }
 
 function CellValue({ column, coin }) {
-  return (
-    <React.Fragment>
-      {column.render ? column.render(coin) : `${column.prefix ? column.prefix + ' ' : ''}${coin[column.selector]}`}
-    </React.Fragment>
-  )
+  return <React.Fragment>
+    {column.render ? column.render(coin) : `${column.prefix ? column.prefix + ' ' : ''}${coin[column.selector]}`}
+  </React.Fragment>
 }
 
 function PriceTable({ tableOptions, columnData, data }) {
