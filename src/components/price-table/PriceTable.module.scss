@@ -1,0 +1,136 @@
+.indexTable {
+  table {
+    width: 100%;
+    border-style: hidden;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px var(--border-color);
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    overflow-x: scroll;
+
+    @media screen and (max-width: 559px) {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    tr {
+      border-bottom: 1px solid var(--border-color);
+      cursor: pointer;
+    }
+
+    tbody {
+      tr {
+        &:hover {
+          background: #fcfafa;
+        }
+      }
+    }
+
+    th, td {
+      text-align: left;
+      padding: 15px 20px;
+    }
+
+    th {
+      color: var(--secondary-text);
+      font-weight: 400;
+      font-size: 14px;
+
+      @media screen and (max-width: 559px) {
+        display: none;
+      }
+
+      &:hover {
+        background: unset;
+      }
+    }
+
+    td {
+      font-size: 18px;
+
+      .nameColumn {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+
+        .title {
+          display: flex;
+          flex-direction: row;
+          gap: 20px;
+
+          @media screen and (max-width: 559px) {
+            flex-direction: column;
+            gap: 0;
+          }
+
+          .coinName {
+
+          }
+
+          .coinCode {
+            color: rgb(91,97,110);
+          }
+        }
+
+        img.logo {
+          width: 36px;
+          height: 36px;
+        }
+      }
+
+      button {
+        border: 0;
+        background-color: rgb(9,133,81);
+        color: white;
+        font-weight: 500;
+        font-size: 14px;
+        border-radius: 5px;
+        padding: 10px 15px;
+      }
+    }
+
+    .index {
+      text-align: center;
+      color: rgb(91,97,110);
+
+      @media screen and (max-width: 559px) {
+        display: none;
+      }
+    }
+
+    .primary {
+      .desktop {
+        display: block;
+      }
+
+      .mobile {
+        display: none;
+      }
+
+      @media screen and (max-width: 559px) {
+        .mobile {
+          display: block;
+          text-align: right;
+        }
+
+        .desktop {
+          display: none;
+        }
+      }
+    }
+
+    .secondary {
+      @media screen and (max-width: 559px) {
+        display: none;
+      }
+    }
+
+    .default {
+      @media screen and (max-width: 559px) {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.indexChart {
+  width: calc(100vw - 40px);
+  @media screen and (max-width: 559px) {
+    width: 100%;
+  }
+  max-width: 1136px;
+  margin-bottom: 50px;
+
+  .marketInfo {
+    padding: 10px;
+    margin-bottom: 10px;
+
+    p, h2 {
+      margin: 0;
+    }
+
+    p {
+      color: var(--secondary-text);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+}
