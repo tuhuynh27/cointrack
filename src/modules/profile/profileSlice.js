@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   isLoggedIn: false,
   email: '',
+  name: '',
   profileImage: '',
 }
 
@@ -25,14 +26,17 @@ export const profileSlice = createSlice({
     setProfile: (state, action) => {
       state.isLoggedIn = true
       state.email = action.payload.email
+      state.name = action.payload.name
       state.profileImage = action.payload.profileImage
-      saveToLocalStorage({ isLoggedIn: true, email: action.payload.email, profileImage: action.payload.profileImage })
+      saveToLocalStorage({ isLoggedIn: true, email: action.payload.email, name: action.payload.name,
+        profileImage: action.payload.profileImage })
     },
     logout: (state) => {
       state.isLoggedIn = false
-      state.email = null
-      state.profileImage = null
-      saveToLocalStorage({ isLoggedIn: false, email: null, profileImage: null })
+      state.email = ''
+      state.name = ''
+      state.profileImage = ''
+      saveToLocalStorage({ isLoggedIn: false, email: '', name: '', profileImage: '' })
     },
   },
 })

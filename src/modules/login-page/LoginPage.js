@@ -69,6 +69,7 @@ function LoginPage() {
         if (email === 'beta@cointrack.me') {
           onLogin({
             email: 'beta@cointrack.me',
+            name: 'Beta User',
             profileImage: 'https://d33wubrfki0l68.cloudfront.net/19e8b1005d45f56e2c10ad30e215298ce50c677e/6f09c/tu-huynh.jpg',
           })
         } else {
@@ -82,15 +83,14 @@ function LoginPage() {
     if (data.error) return
     if (!data || !data.profileObj.email || !data.accessToken) return
 
-    console.log(data)
     const img = data.profileObj.imageUrl.split('=')[0]
 
-    onLogin({ email: data.profileObj.email, profileImage: img })
+    onLogin({ email: data.profileObj.email, name: data.profileObj.name, profileImage: img })
   }
 
-  function onLogin({ email, profileImage }) {
-    dispatch(setProfile({ isLoggedIn: true, email, profileImage }))
-    toast(`Welcome back ${email}`)
+  function onLogin({ email, name, profileImage }) {
+    dispatch(setProfile({ isLoggedIn: true, email, name, profileImage }))
+    toast(`Welcome back ${name}`)
     if (location.pathname === '/login') {
       navigate('/portfolio')
     }

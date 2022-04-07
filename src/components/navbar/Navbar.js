@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './Navbar.module.scss'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 
 import Logo from 'assets/img/logo.png'
@@ -37,6 +37,7 @@ function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false)
   const profile = useSelector(selectProfile)
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   function toggleMobileMenu() {
@@ -97,12 +98,18 @@ function Navbar() {
           </div>
           <div className={styles.mobileButtons}>
             <RenderIf value={!profile.isLoggedIn}>
-              <button className={styles.getStarted} onClick={toggleMobileMenu}>Get started</button>
-              <button className={styles.signIn} onClick={toggleMobileMenu}>Sign in</button>
+              <button className={styles.getStarted} onClick={() => {
+                toggleMobileMenu()
+                navigate('/login')
+              }}>Get started</button>
+              <button className={styles.signIn} onClick={() => {
+                toggleMobileMenu()
+                navigate('/login')
+              }}>Sign in</button>
             </RenderIf>
             <RenderIf value={profile.isLoggedIn}>
               <img src={profile.profileImage} alt="Down"/>
-              <p>Hi, {profile.email}</p>
+              <p>Hi, {profile.name}</p>
               <button className={styles.signIn} onClick={() => {
                 setIsMobileMenuOpen(false)
                 dispatch(logout())
