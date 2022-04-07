@@ -39,11 +39,15 @@ function DataCell({ columnData, column, coin }) {
 
 function CellValue({ column, coin }) {
   return <React.Fragment>
-    {column.render ? column.render(coin) : `${column.prefix ? column.prefix + ' ' : ''}${coin[column.selector]}`}
+    {column.render ? column.render(coin) : coin[column.selector]}
   </React.Fragment>
 }
 
-function PriceTable({ tableOptions, columnData, data }) {
+const defaultTableOptions = {
+  displayIndex: true,
+}
+
+function PriceTable({ tableOptions = defaultTableOptions, columnData = [], data = [] }) {
   return (
     <div className={styles.indexTable}>
       <table>

@@ -14,9 +14,8 @@ const tableOptions = {
 const columnData = [
   {
     name: 'Price',
-    selector: 'price',
+    render: (coin) => `USD ${coin.price}`,
     isPrimary: true,
-    prefix: 'USD',
   },
   {
     name: 'Change',
