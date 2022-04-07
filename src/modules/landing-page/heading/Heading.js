@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import mobileAppIconSvg from 'modules/svg/mobileAppIcon.svg'
 
 function Heading() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
 
   function handleSubmit(e) {

@@ -73,6 +73,7 @@
         border-radius: 5px;
         font-weight: 500;
         font-size: 14px;
+        min-width: 100px;
 
         &.signIn {
           background: white;
@@ -89,6 +90,55 @@
 
         &.getStarted {
 
+        }
+      }
+
+      .avatarSection {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        position: relative;
+        cursor: pointer;
+
+        img {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+
+          &.pointingDown {
+            width: 14px;
+            height: 14px;
+
+            @media screen and (max-width: 559px) {
+              display: none;
+            }
+          }
+        }
+
+        .dropdownMenu {
+          position: absolute;
+          bottom: -10px;
+          right: 0;
+          width: 150px;
+          background-color: white;
+          transform: translateY(100%);
+          border: 1px solid var(--border-color);
+          border-radius: 5px;
+
+          @media screen and (max-width: 559px) {
+            display: none;
+          }
+
+          div {
+            cursor: pointer;
+            padding: 10px;
+
+            &:hover {
+              background-color: #ccc;
+            }
+          }
         }
       }
 
@@ -220,6 +270,12 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+
+    p {
+      padding: 0;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
 
     button {
       border: 0;

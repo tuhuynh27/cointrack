@@ -5,6 +5,9 @@ import { validateEmail } from 'utils/validation'
 import { getQueryParam } from 'utils/queryString'
 
 import { toast } from 'utils/toast'
+import { useDispatch } from 'react-redux'
+import { setProfile } from 'modules/profile/profileSlice'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 function LoginPage() {
   const emailInputRef = useRef(null)
@@ -13,6 +16,9 @@ function LoginPage() {
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (emailInputRef.current) {
@@ -50,7 +56,15 @@ function LoginPage() {
       setIsLoading(true)
       setTimeout(() => {
         setIsLoading(false)
-        setEmailError('No Cointrack account exists for this email. Please check your spelling or create an account.')
+        if (email === 'beta@cointrack.me') {
+          dispatch(setProfile({ isLoggedIn: true, email: 'beta@cointrack.me' }))
+          toast('Welcome back beta@cointrack.me')
+          if (location.pathname === '/login') {
+            navigate('/portfolio')
+          }
+        } else {
+          setEmailError('No Cointrack account exists for this email. Please check your spelling or create an account.')
+        }
       }, 2000)
     }
   }

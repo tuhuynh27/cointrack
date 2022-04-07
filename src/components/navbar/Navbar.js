@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 
 import Logo from 'assets/img/logo.png'
+import { useSelector } from 'react-redux'
+import { logout, selectProfile } from 'modules/profile/profileSlice'
+import { useDispatch } from 'react-redux'
+import RenderIf from 'components/condition/RenderIf'
 
 const menu = [
   {
@@ -31,10 +35,14 @@ const menu = [
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false)
+  const profile = useSelector(selectProfile)
+  const dispatch = useDispatch()
 
   function toggleMobileMenu() {
     setIsMobileMenuOpen(m => !m)
   }
+
   return (
     <React.Fragment>
       <div className={styles.navbar}>
@@ -46,9 +54,25 @@ function Navbar() {
             ))}
           </div>
           <div className={styles.buttons}>
-            <Link to='/login'><button className={styles.signIn}>Sign in</button></Link>
-            <Link to='/login' onClick={() => setIsMobileMenuOpen(false)}>
-              <button className={styles.getStarted}>Get started</button></Link>
+            <RenderIf value={!profile.isLoggedIn}>
+              <Link to='/login'><button className={styles.signIn}>Sign in</button></Link>
+              <Link to='/login' onClick={() => setIsMobileMenuOpen(false)}>
+                <button className={styles.getStarted}>Get started</button></Link>
+            </RenderIf>
+            <RenderIf value={profile.isLoggedIn}>
+              <Link to='/login' onClick={() => setIsMobileMenuOpen(false)}>
+                <button className={styles.getStarted}>Check PnL</button></Link>
+              <div className={styles.avatarSection}>
+                <img onClick={() => setProfileDropdownOpen(t => !t)}
+                     src="https://d33wubrfki0l68.cloudfront.net/19e8b1005d45f56e2c10ad30e215298ce50c677e/6f09c/tu-huynh.jpg" alt="Avatar"/>
+                <img onClick={() => setProfileDropdownOpen(t => !t)} className={styles.pointingDown}
+                     src="https://www.svgrepo.com/show/58069/down-arrow.svg" alt="Down"/>
+                {profileDropdownOpen && <div className={styles.dropdownMenu}>
+                  <div>Profile Page</div>
+                  <div onClick={() => dispatch(logout())}>Logout</div>
+                </div>}
+              </div>
+            </RenderIf>
             <div className={styles.mobileMenuButton}>
               <div className={isMobileMenuOpen ? styles.closeButton : styles.openButton} onClick={toggleMobileMenu}>
               </div>
@@ -69,8 +93,17 @@ function Navbar() {
             ))}
           </div>
           <div className={styles.mobileButtons}>
-            <button className={styles.getStarted} onClick={toggleMobileMenu}>Get started</button>
-            <button className={styles.signIn} onClick={toggleMobileMenu}>Sign in</button>
+            <RenderIf value={!profile.isLoggedIn}>
+              <button className={styles.getStarted} onClick={toggleMobileMenu}>Get started</button>
+              <button className={styles.signIn} onClick={toggleMobileMenu}>Sign in</button>
+            </RenderIf>
+            <RenderIf value={profile.isLoggedIn}>
+              <p>Hi, {profile.email}</p>
+              <button className={styles.signIn} onClick={() => {
+                setIsMobileMenuOpen(false)
+                dispatch(logout())
+              }}>Logout</button>
+            </RenderIf>
           </div>
         </div>
       </CSSTransition>
