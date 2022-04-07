@@ -64,7 +64,6 @@ const routes = [
   },
   {
     path: '*',
-    title: 'Not Found',
     element: <NotFoundPage/>
   }
 ]
@@ -73,7 +72,9 @@ function Router() {
   const location = useLocation()
 
   useEffect(() => {
-    document.title = (routes.find(route => route.path === location.pathname).title || 'Cointrack') + ' - Cointrack'
+    const route = routes.find(route => route.path === location.pathname)
+    const title = route ? route.title : 'Not Found'
+    document.title = title + ' - Cointrack'
   }, [location.pathname])
 
   useLayoutEffect(() => {
