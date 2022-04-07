@@ -37,6 +37,7 @@ export const profileSlice = createSlice({
       state.name = ''
       state.profileImage = ''
       saveToLocalStorage({ isLoggedIn: false, email: '', name: '', profileImage: '' })
+      window.location.reload()
     },
   },
 })
