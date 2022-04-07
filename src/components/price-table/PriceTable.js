@@ -65,7 +65,7 @@ function PriceTable({ tableOptions, columnData, data }) {
           {tableOptions.displayIndex && <td className={styles.index}>{index + 1}</td>}
           <td>
             <div className={styles.nameColumn}>
-              <img className={styles.logo} alt="Coin Logo" src={coin.logo}/>
+              <img className={styles.logo} alt={`${coin.name} logo`} src={coin.logo}/>
               <div className={styles.title}>
                 <div className={styles.coinName}>{coin.name}</div>
                 <div className={styles.coinCode}>{coin.code}</div>
