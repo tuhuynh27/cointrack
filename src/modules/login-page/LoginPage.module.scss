@@ -73,6 +73,12 @@
         font-size: 16px;
         position: relative;
 
+        img, svg {
+          position: absolute;
+          bottom: 22px;
+          left: 22px;
+        }
+
         @media screen and (max-width: 559px) {
           padding: 10px 5px;
           font-size: 14px;

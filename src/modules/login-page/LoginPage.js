@@ -9,6 +9,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectProfile, setProfile } from 'modules/profile/profileSlice'
 import { useLocation, useNavigate } from 'react-router-dom'
 
+import GoogleLogin from 'react-google-login'
+import GoogleSvg from 'modules/svg/google.svg'
+
 function LoginPage() {
   const emailInputRef = useRef(null)
   const [email, setEmail] = useState('')
@@ -64,15 +67,32 @@ function LoginPage() {
       setTimeout(() => {
         setIsLoading(false)
         if (email === 'beta@cointrack.me') {
-          dispatch(setProfile({ isLoggedIn: true, email: 'beta@cointrack.me' }))
-          toast('Welcome back beta@cointrack.me')
-          if (location.pathname === '/login') {
-            navigate('/portfolio')
-          }
+          onLogin({
+            email: 'beta@cointrack.me',
+            profileImage: 'https://d33wubrfki0l68.cloudfront.net/19e8b1005d45f56e2c10ad30e215298ce50c677e/6f09c/tu-huynh.jpg',
+          })
         } else {
           setEmailError('No Cointrack account exists for this email. Please check your spelling or create an account.')
         }
       }, 2000)
+    }
+  }
+
+  function responseGoogle(data) {
+    if (data.error) return
+    if (!data || !data.profileObj.email || !data.accessToken) return
+
+    console.log(data)
+    const img = data.profileObj.imageUrl.split('=')[0]
+
+    onLogin({ email: data.profileObj.email, profileImage: img })
+  }
+
+  function onLogin({ email, profileImage }) {
+    dispatch(setProfile({ isLoggedIn: true, email, profileImage }))
+    toast(`Welcome back ${email}`)
+    if (location.pathname === '/login') {
+      navigate('/portfolio')
     }
   }
 
@@ -97,9 +117,18 @@ function LoginPage() {
           </div>
           <div className={styles.buttonGroup}>
             <button disabled={isLoading} className={isLoading ? styles.loading : null} onClick={handleSubmit} type="submit">Continue</button>
-            <button onClick={() =>
-              toast(`Now we're only open to beta testers, if you're interested in beta access, please contact us at beta@cointrack.me`)}
-                    className={styles.secondaryButton} type="button">Create account</button>
+            <GoogleLogin
+              clientId="834798810236-mo101qd4s238ajssl05n4j4t9i2r4ch5.apps.googleusercontent.com"
+              render={renderProps => (
+                <button className={styles.secondaryButton} type="button" onClick={renderProps.onClick}>
+                  Log In With Google
+                  <img src={GoogleSvg} alt="Google" />
+                </button>
+              )}
+              buttonText="Login with Google"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+            />
           </div>
         </form>
       </div>

@@ -64,7 +64,7 @@ function Navbar() {
                 <button className={styles.getStarted}>Check PnL</button></Link>
               <div className={styles.avatarSection}>
                 <img onClick={() => setProfileDropdownOpen(t => !t)}
-                     src="https://d33wubrfki0l68.cloudfront.net/19e8b1005d45f56e2c10ad30e215298ce50c677e/6f09c/tu-huynh.jpg" alt="Avatar"/>
+                     src={profile.profileImage} alt="Avatar" crossOrigin="anonymous"/>
                 <img onClick={() => setProfileDropdownOpen(t => !t)} className={styles.pointingDown}
                      src="https://www.svgrepo.com/show/58069/down-arrow.svg" alt="Down"/>
                 {profileDropdownOpen && <div className={styles.dropdownMenu}>
