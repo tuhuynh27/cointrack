@@ -77,6 +77,11 @@
           position: absolute;
           bottom: 22px;
           left: 22px;
+
+          @media screen and (max-width: 559px) {
+            bottom: 11px;
+            left: 11px;
+          }
         }
 
         @media screen and (max-width: 559px) {

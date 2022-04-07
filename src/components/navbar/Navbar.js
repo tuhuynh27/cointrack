@@ -101,6 +101,7 @@ function Navbar() {
               <button className={styles.signIn} onClick={toggleMobileMenu}>Sign in</button>
             </RenderIf>
             <RenderIf value={profile.isLoggedIn}>
+              <img src={profile.profileImage} alt="Down"/>
               <p>Hi, {profile.email}</p>
               <button className={styles.signIn} onClick={() => {
                 setIsMobileMenuOpen(false)
