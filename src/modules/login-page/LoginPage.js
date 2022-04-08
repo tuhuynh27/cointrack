@@ -104,7 +104,7 @@ function LoginPage() {
           <div className={styles.inputElement}>
             <label htmlFor="email">Email</label>
             <input className={emailError.length ? styles.error : null} id="email"
-                   autoComplete="email"
+                   autoComplete="email" type="email"
                    value={email} onChange={handleInputChange} ref={emailInputRef} />
             {emailError.length ? <p className={styles.errorMessage}>{emailError}</p> : null}
           </div>
