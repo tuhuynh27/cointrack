@@ -41,6 +41,15 @@ const routes = [
     )
   },
   {
+    path: '/portfolio/:code',
+    title: 'Portfolio',
+    element: (
+      <RequireAuth>
+        <NotFoundPage/>
+      </RequireAuth>
+    )
+  },
+  {
     path: '/transactions',
     title: 'Transactions',
     element: (
@@ -66,7 +75,7 @@ const routes = [
     element: (
       <RequireAuth>
         <h2 style={{ margin: '50px 0 0 0' }}>Bot Trading</h2>
-        <p>Coming soon feature, please stay tuned.</p>
+        <p>Please upgrade to Cointrack Premium to use this feature</p>
       </RequireAuth>
     )
   },

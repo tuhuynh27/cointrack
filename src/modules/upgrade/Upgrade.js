@@ -11,10 +11,10 @@ function Upgrade() {
           <li>Sync all of your crypto in one place</li>
           <li>Support for thousands of coins</li>
           <li>Daily portfolio revenue report & market news</li>
-          <li>Protect your assets privacy industry-leading security</li>
+          <li>Create & watch virtual trading bots</li>
         </ul>
         <button onClick={() => {
-          toast('Coming soon!')
+          toast('Please contact premium@cointrack.me', { ms: 3000 })
         }}>Upgrade to Cointrack Premium</button>
       </div>
       <div className={styles.rightSide}>
