@@ -5,7 +5,7 @@ function Upgrade() {
   return (
     <div className={styles.upgradePage}>
       <div className={styles.leftSide}>
-        <h1>Cointrack Premium</h1>
+        <h1>Cointrack+</h1>
         <h2>Better way to keep track of your cryptos</h2>
         <ul>
           <li>Sync all of your crypto in one place</li>
@@ -14,8 +14,8 @@ function Upgrade() {
           <li>Create & watch virtual trading bots</li>
         </ul>
         <button onClick={() => {
-          toast('Please contact premium@cointrack.me', { ms: 3000 })
-        }}>Upgrade to Cointrack Premium</button>
+          toast('Please contact plus@cointrack.me', { ms: 3000 })
+        }}>Upgrade to Cointrack+</button>
       </div>
       <div className={styles.rightSide}>
         <div className={styles.wrapper}/>

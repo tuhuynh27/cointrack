@@ -65,7 +65,7 @@ const routes = [
     element: (
       <RequireAuth>
         <h2 style={{ margin: '50px 0 0 0' }}>Profits and Losses</h2>
-        <p>There's no data for now.</p>
+        <p>TPlease upgrade to Cointrack+ to use this feature.</p>
       </RequireAuth>
     )
   },
@@ -75,7 +75,7 @@ const routes = [
     element: (
       <RequireAuth>
         <h2 style={{ margin: '50px 0 0 0' }}>Bot Trading</h2>
-        <p>Please upgrade to Cointrack Premium to use this feature</p>
+        <p>Please upgrade to Cointrack+ to use this feature.</p>
       </RequireAuth>
     )
   },
