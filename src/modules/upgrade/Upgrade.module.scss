@@ -1,18 +1,19 @@
 .upgradePage {
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 25px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: calc(100% - 40px);
+  width: 100%;
   max-width: 1136px;
 
   @media (max-width: 899px) {
     flex-direction: column;
+    overflow-x: hidden;
   }
 
   .leftSide {
+    margin: 0 20px;
     h1 {
        font-size: 48px;
        line-height: 64px;
