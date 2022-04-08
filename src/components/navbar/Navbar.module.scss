@@ -61,7 +61,7 @@
       flex-direction: row;
       gap: 10px;
       align-items: center;
-      @media screen and (max-width: 559px) {
+      @media screen and (max-width: 889px) {
         gap: 20px;
       }
 
@@ -102,7 +102,7 @@
         position: relative;
         cursor: pointer;
 
-        @media screen and (max-width: 559px) {
+        @media screen and (max-width: 889px) {
           display: none;
         }
 
@@ -145,7 +145,7 @@
         height: 17px;
         cursor: pointer;
 
-        @media screen and (max-width: 559px) {
+        @media screen and (max-width: 889px) {
           display: block;
         }
 
@@ -237,7 +237,7 @@
   align-items: center;
   z-index: 1000;
 
-  @media screen and (max-width: 559px) {
+  @media screen and (max-width: 889px) {
     visibility: unset;
   }
 
