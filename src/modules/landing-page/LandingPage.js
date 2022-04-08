@@ -9,6 +9,7 @@ import RenderIf from 'components/condition/RenderIf'
 
 import { useSelector } from 'react-redux'
 import { selectProfile } from 'modules/profile/profileSlice'
+import { Link } from 'react-router-dom'
 
 function greeting() {
   const today = new Date()
@@ -31,6 +32,9 @@ function LandingPage() {
       <RenderIf value={profile.isLoggedIn}>
         <div className={styles.greeting}>
           <h1>{greeting()}, {profile.name}</h1>
+          <p>Your profit is
+            <span style={{ color: 'green', fontWeight: '500' }}> up 1.02% </span>
+            today, checkout the crypto news <Link to="/market-updates">here</Link>.</p>
         </div>
         <IndexTable showMarketStatus={false}/>
       </RenderIf>
