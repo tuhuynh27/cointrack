@@ -30,10 +30,14 @@ const columnData = [
     selector: 'volume',
   },
   {
-    name: '',
+    name: 'Track',
     render: (coin) => (
       <Link to={`/portfolio/${coin.code}`}>
-        <button style={{ backgroundColor: 'var(--primary-color)' }}>Track</button>
+        <button style={{
+          color: 'var(--primary-color)',
+          border: '.5px solid var(--primary-color)',
+          backgroundColor: '#fff'
+        }}>Track</button>
       </Link>
     ),
   }
