@@ -15,6 +15,7 @@ import LoginPage from './modules/login-page/LoginPage'
 import NotFoundPage from './modules/not-found-page/NotFoundPage'
 import RequireAuth from './components/auth/RequireAuth'
 import MarketUpdatesPage from './modules/market-updates-page/MarketUpdatesPage'
+import Upgrade from './modules/upgrade/Upgrade'
 
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
@@ -73,6 +74,11 @@ const routes = [
     path: '/market-updates',
     title: 'Market Updates',
     element: <MarketUpdatesPage/>
+  },
+  {
+    path: '/upgrade',
+    title: 'Upgrade',
+    element: <Upgrade/>
   },
   {
     path: '*',
