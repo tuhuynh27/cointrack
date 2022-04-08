@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from 'react'
+import { Suspense, lazy, useEffect, useLayoutEffect } from 'react'
 import styles from './App.module.scss'
 
 import {
@@ -8,16 +8,19 @@ import {
   useLocation
 } from 'react-router-dom'
 
-import Navbar from './components/navbar/Navbar'
-import LandingPage from './modules/landing-page/LandingPage'
-import Portfolio from './modules/portfolio/Portfolio'
-import LoginPage from './modules/login-page/LoginPage'
-import NotFoundPage from './modules/not-found-page/NotFoundPage'
 import RequireAuth from './components/auth/RequireAuth'
-import MarketUpdatesPage from './modules/market-updates-page/MarketUpdatesPage'
-import Upgrade from './modules/upgrade/Upgrade'
 
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
+
+import Navbar from './components/navbar/Navbar'
+import LoadingFullPage from './components/loading-full-page/LoadingFullPage'
+
+const LandingPage = lazy(() => import('./modules/landing-page/LandingPage'))
+const Portfolio = lazy(() => import('./modules/portfolio/Portfolio'))
+const LoginPage = lazy(() => import('./modules/login-page/LoginPage'))
+const NotFoundPage = lazy(() => import('./modules/not-found-page/NotFoundPage'))
+const MarketUpdatesPage = lazy(() => import('./modules/market-updates-page/MarketUpdatesPage'))
+const Upgrade = lazy(() => import('./modules/upgrade/Upgrade'))
 
 const routes = [
   {
@@ -112,11 +115,13 @@ function Router() {
     <TransitionGroup>
       <CSSTransition key={location.pathname} exit={false} classNames="fade" timeout={300}>
         <div className={styles.outlet}>
-          <Routes>
-            {routes.map(route => (
-              <Route key={route.path} {...route} />
-            ))}
-          </Routes>
+          <Suspense fallback={<LoadingFullPage/>}>
+            <Routes>
+              {routes.map(route => (
+                <Route key={route.path} {...route} />
+              ))}
+            </Routes>
+          </Suspense>
         </div>
       </CSSTransition>
     </TransitionGroup>
