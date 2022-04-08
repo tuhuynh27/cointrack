@@ -65,11 +65,6 @@ export const portfolioCoins = [
     logo: 'https://dynamic-assets.coinbase.com/4de5ed5f00801c096d041734f2658e29798b4cc3098a2176a425bfa3a744de394a4f1ca58920e97d855ef4cef82b81a6465f6b529879540bc27235c19790e3f5/asset_icons/b972ddcda5ada9fa4b0d6f3a897508cbb36b0c0c923ac856e4d6dfce5f45cc12.png'
   },
   {
-    name: 'Dai',
-    code: 'DAI',
-    logo: 'https://dynamic-assets.coinbase.com/90184cca292578d533bb00d9ee98529b889c15126bb120582309286b9129df9886781b30c85c21ee9cae9f2db6dc11e88633c7361fdd1ba5046ea444e101ae15/asset_icons/ebc24b163bf1f58a9732a9a1d2faa5b2141b041d754ddc2260c5e76edfed261e.png'
-  },
-  {
     name: 'Litecoin',
     code: 'LTC',
     logo: 'https://dynamic-assets.coinbase.com/f018870b721574ef7f269b9fd91b36042dc05ebed4ae9dcdc340a1bae5b359e8760a8c224bc99466db704d10a3e23cf1f4cd1ff6f647340c4c9c899a9e6595cd/asset_icons/984a4fe2ba5b2c325c06e4c2f3ba3f1c1fef1f157edb3b8ebbfe234340a157a5.png'
