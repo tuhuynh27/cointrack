@@ -61,7 +61,7 @@ function Navbar() {
                 <button className={styles.getStarted}>Get started</button></Link>
             </RenderIf>
             <RenderIf value={profile.isLoggedIn}>
-              <Link to='/portfolio' onClick={() => setIsMobileMenuOpen(false)}>
+              <Link to='/upgrade' onClick={() => setIsMobileMenuOpen(false)}>
                 <button className={styles.getStarted}>Upgrade+</button></Link>
               <div className={styles.avatarSection}>
                 <img onClick={() => setProfileDropdownOpen(t => !t)}
