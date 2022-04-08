@@ -62,7 +62,7 @@ function Navbar() {
             </RenderIf>
             <RenderIf value={profile.isLoggedIn}>
               <Link to='/portfolio' onClick={() => setIsMobileMenuOpen(false)}>
-                <button className={styles.getStarted}>Check PnL</button></Link>
+                <button className={styles.getStarted}>Upgrade+</button></Link>
               <div className={styles.avatarSection}>
                 <img onClick={() => setProfileDropdownOpen(t => !t)}
                      src={profile.profileImage} alt="Avatar" crossOrigin="anonymous"/>

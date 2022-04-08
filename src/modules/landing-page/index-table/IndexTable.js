@@ -5,12 +5,6 @@ import { Link } from 'react-router-dom'
 import useCoinData from 'hooks/useCoinData'
 import { indexCoins } from './data'
 import PriceTable from 'components/price-table/PriceTable'
-import { useSelector } from 'react-redux'
-import { selectProfile } from 'modules/profile/profileSlice'
-
-const tableOptions = {
-  displayIndex: true,
-}
 
 const columnData = [
   {
@@ -39,22 +33,12 @@ const columnData = [
   }
 ]
 
-function IndexTable() {
-  const profile = useSelector(selectProfile)
-  const { state: data } = useCoinData(indexCoins, profile.isLoggedIn ? 0 : 4)
-
-  const marketStatus = (data.reduce((sum, coin) => sum + parseFloat(coin.change), 0) / data.length)
+function IndexTable({ showMarketStatus }) {
+  const { state: data } = useCoinData(indexCoins)
 
   return (
     <div className={styles.indexChart}>
-      <div className={styles.marketInfo}>
-        <p>In the past 24 hours</p>
-        <h2>Market is&nbsp;
-          {marketStatus >= 0 ? 'up' : 'down'} <span style={{ color: marketStatus >= 0 ? 'green' : 'red' }}>
-            {Math.abs(marketStatus).toFixed(2)}%</span>
-        </h2>
-      </div>
-      <PriceTable tableOptions={tableOptions} columnData={columnData} data={data}/>
+      <PriceTable tableOptions={{ displayIndex: true, showMarketStatus }} columnData={columnData} data={data}/>
     </div>
   )
 }

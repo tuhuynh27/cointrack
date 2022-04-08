@@ -28,19 +28,18 @@ function LandingPage() {
 
   return (
     <React.Fragment>
-      <RenderIf value={!profile.isLoggedIn}>
-        <Heading/>
-      </RenderIf>
       <RenderIf value={profile.isLoggedIn}>
         <div className={styles.greeting}>
           <h1>{greeting()}, {profile.name}</h1>
         </div>
+        <IndexTable showMarketStatus={false}/>
       </RenderIf>
-      <IndexTable/>
       <RenderIf value={!profile.isLoggedIn}>
+        <Heading/>
+        <IndexTable showMarketStatus={true}/>
         <PortfolioShow/>
+        <Footer/>
       </RenderIf>
-      <Footer/>
     </React.Fragment>
   )
 }

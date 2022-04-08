@@ -10,6 +10,7 @@ import {
 
 import Navbar from './components/navbar/Navbar'
 import LandingPage from './modules/landing-page/LandingPage'
+import Portfolio from './modules/portfolio/Portfolio'
 import LoginPage from './modules/login-page/LoginPage'
 import NotFoundPage from './modules/not-found-page/NotFoundPage'
 import RequireAuth from './components/auth/RequireAuth'
@@ -34,7 +35,7 @@ const routes = [
     title: 'Portfolio',
     element: (
       <RequireAuth>
-        <NotFoundPage />
+        <Portfolio />
       </RequireAuth>
     )
   },
@@ -43,19 +44,30 @@ const routes = [
     title: 'Transactions',
     element: (
       <RequireAuth>
-        <NotFoundPage />
+        <h2 style={{ margin: '50px 0 0 0' }}>Transactions</h2>
+        <p>There's no transaction for now.</p>
       </RequireAuth>
     )
   },
   {
     path: '/pnl',
     title: 'PNL',
-    element: <NotFoundPage/>
+    element: (
+      <RequireAuth>
+        <h2 style={{ margin: '50px 0 0 0' }}>Profits and Losses</h2>
+        <p>There's no data for now.</p>
+      </RequireAuth>
+    )
   },
   {
     path: '/bot-trading',
     title: 'Bot Trading',
-    element: <NotFoundPage/>
+    element: (
+      <RequireAuth>
+        <h2 style={{ margin: '50px 0 0 0' }}>Bot Trading</h2>
+        <p>Coming soon feature, please stay tuned.</p>
+      </RequireAuth>
+    )
   },
   {
     path: '/market-updates',

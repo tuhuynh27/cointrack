@@ -45,8 +45,8 @@ function init(coins) {
   }))
 }
 
-export default function useCoinData(coins, limit = 0) {
-  const [state, dispatch] = useReducer(reducer, limit !== 0 ? coins.slice(0, limit) : coins, init)
+export default function useCoinData(coins = [], limit = 0) {
+  const [state, dispatch] = useReducer(reducer, coins, init)
   const [isLoaded, setIsLoaded] = useState(false)
 
   const loadMeta = useCallback(
@@ -77,12 +77,11 @@ export default function useCoinData(coins, limit = 0) {
   )
 
   useEffect(() => {
-    const timeout = setTimeout(() => void loadMeta(), 1000)
+    void loadMeta()
     const interval = setInterval(() => {
       void loadMeta()
     }, 5000)
     return () => {
-      clearTimeout(timeout)
       clearInterval(interval)
     }
   }, [loadMeta])
