@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import useCoinData from 'hooks/useCoinData'
 import { indexCoins } from './data'
 import PriceTable from 'components/price-table/PriceTable'
+import LoadingFullPage from 'components/loading-full-page/LoadingFullPage'
 
 const columnData = [
   {
@@ -34,7 +35,11 @@ const columnData = [
 ]
 
 function IndexTable({ showMarketStatus }) {
-  const { state: data } = useCoinData(indexCoins)
+  const { state: data, isLoaded } = useCoinData(indexCoins)
+
+  if (!isLoaded) {
+    return <LoadingFullPage />
+  }
 
   return (
     <div className={styles.indexChart}>
