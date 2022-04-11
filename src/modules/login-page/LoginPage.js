@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './LoginPage.module.scss'
 
 import { validateEmail } from 'utils/validation'
@@ -44,7 +44,7 @@ function LoginPage() {
   }, [])
 
   function handleInputChange(e) {
-    const { id, value } = e.target
+    const {id, value} = e.target
     if (id === 'email') {
       setEmailError('')
       setEmail(value)
@@ -85,11 +85,11 @@ function LoginPage() {
 
     const img = data.profileObj.imageUrl.split('=')[0]
 
-    onLogin({ email: data.profileObj.email, name: data.profileObj.name, profileImage: img })
+    onLogin({email: data.profileObj.email, name: data.profileObj.name, profileImage: img})
   }
 
-  function onLogin({ email, name, profileImage }) {
-    dispatch(setProfile({ isLoggedIn: true, email, name, profileImage }))
+  function onLogin({email, name, profileImage}) {
+    dispatch(setProfile({isLoggedIn: true, email, name, profileImage}))
     toast(`Welcome back ${name}`)
     if (location.pathname === '/login') {
       navigate('/portfolio')
@@ -105,35 +105,35 @@ function LoginPage() {
             <label htmlFor="email">Email</label>
             <input className={emailError.length ? styles.error : null} id="email"
                    autoComplete="email" type="email"
-                   value={email} onChange={handleInputChange} ref={emailInputRef} />
+                   value={email} onChange={handleInputChange} ref={emailInputRef}/>
             {emailError.length ?
-                <p data-test="email-error" className={styles.errorMessage}>{emailError}</p> : null}
+              <p data-test="email-error" className={styles.errorMessage}>{emailError}</p> : null}
           </div>
           <div className={styles.inputElement}>
             <label htmlFor="password">Password</label>
             <input className={passwordError.length ? styles.error : null} id="password" type="password"
                    autoComplete="current-password"
-                   value={password} onChange={handleInputChange} />
+                   value={password} onChange={handleInputChange}/>
             {passwordError.length ?
-                <p data-test="password-error" className={styles.errorMessage}>{passwordError}</p> : null}
+              <p data-test="password-error" className={styles.errorMessage}>{passwordError}</p> : null}
           </div>
           <div className={styles.buttonGroup}>
             <button
-                data-test="login-button"
-                disabled={isLoading}
-                className={isLoading ? styles.loading : null} onClick={handleSubmit}
-                type="submit">
+              data-test="login-button"
+              disabled={isLoading}
+              className={isLoading ? styles.loading : null} onClick={handleSubmit}
+              type="submit">
               Continue
             </button>
             <GoogleLogin
               clientId="834798810236-mo101qd4s238ajssl05n4j4t9i2r4ch5.apps.googleusercontent.com"
               render={renderProps => (
                 <button
-                    data-test="google-login-button"
-                    className={styles.secondaryButton}
-                    type="button" onClick={renderProps.onClick}>
+                  data-test="google-login-button"
+                  className={styles.secondaryButton}
+                  type="button" onClick={renderProps.onClick}>
                   Log In With Google
-                  <img src={GoogleSvg} alt="Google" />
+                  <img src={GoogleSvg} alt="Google"/>
                 </button>
               )}
               buttonText="Login with Google"

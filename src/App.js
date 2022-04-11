@@ -14,6 +14,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import Navbar from './components/navbar/Navbar'
 import LoadingFullPage from './components/loading-full-page/LoadingFullPage'
+import ErrorBoundary from './components/error-boundary/ErrorBoundary'
 
 const LandingPage = lazy(() => import('./modules/landing-page/LandingPage'))
 const Portfolio = lazy(() => import('./modules/portfolio/Portfolio'))
@@ -115,13 +116,15 @@ function Router() {
     <TransitionGroup>
       <CSSTransition key={location.pathname} exit={false} classNames="fade" timeout={300}>
         <div className={styles.outlet}>
-          <Suspense fallback={<LoadingFullPage/>}>
-            <Routes>
-              {routes.map(route => (
-                <Route key={route.path} {...route} />
-              ))}
-            </Routes>
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<LoadingFullPage/>}>
+              <Routes>
+                {routes.map(route => (
+                  <Route key={route.path} {...route} />
+                ))}
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
         </div>
       </CSSTransition>
     </TransitionGroup>
