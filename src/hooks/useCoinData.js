@@ -50,7 +50,7 @@ export default function useCoinData(coins = [], limit = 0) {
   const [isLoaded, setIsLoaded] = useState(false)
 
   const loadMeta = useCallback(
-    async () => {
+    async (controller) => {
       const obj = Object.create(null)
       for (const e of coins) {
         const resp = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${e.code}USDT`)
@@ -71,25 +71,34 @@ export default function useCoinData(coins = [], limit = 0) {
           lowPrice: lowPrice,
         }
       }
+      if (controller.isCancelled) {
+        return
+      }
       dispatch({ type: 'updateChanges', data: obj })
       setIsLoaded(true)
     }, [coins]
   )
 
   useEffect(() => {
-    void loadMeta()
+    const controller = { isCancelled: false }
+    void loadMeta(controller)
     const interval = setInterval(() => {
-      void loadMeta()
+      void loadMeta(controller)
     }, 5000)
     return () => {
+      controller.isCancelled = true
       clearInterval(interval)
     }
   }, [loadMeta])
 
   useEffect(() => {
+    const controller = { isCancelled: false }
     // Batch update prices
     let obj = Object.create(null)
     const interval = setInterval(() => {
+      if (controller.isCancelled) {
+        return
+      }
       dispatch({
         type: 'updatePrices',
         data: obj,
@@ -127,6 +136,7 @@ export default function useCoinData(coins = [], limit = 0) {
     void connect()
 
     return () => {
+      controller.isCancelled = true
       clearInterval(interval)
       clearTimeout(timeout)
       if (socket) {
