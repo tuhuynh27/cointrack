@@ -106,21 +106,32 @@ function LoginPage() {
             <input className={emailError.length ? styles.error : null} id="email"
                    autoComplete="email" type="email"
                    value={email} onChange={handleInputChange} ref={emailInputRef} />
-            {emailError.length ? <p className={styles.errorMessage}>{emailError}</p> : null}
+            {emailError.length ?
+                <p data-test="email-error" className={styles.errorMessage}>{emailError}</p> : null}
           </div>
           <div className={styles.inputElement}>
             <label htmlFor="password">Password</label>
             <input className={passwordError.length ? styles.error : null} id="password" type="password"
                    autoComplete="current-password"
                    value={password} onChange={handleInputChange} />
-            {passwordError.length ? <p className={styles.errorMessage}>{passwordError}</p> : null}
+            {passwordError.length ?
+                <p data-test="password-error" className={styles.errorMessage}>{passwordError}</p> : null}
           </div>
           <div className={styles.buttonGroup}>
-            <button disabled={isLoading} className={isLoading ? styles.loading : null} onClick={handleSubmit} type="submit">Continue</button>
+            <button
+                data-test="login-button"
+                disabled={isLoading}
+                className={isLoading ? styles.loading : null} onClick={handleSubmit}
+                type="submit">
+              Continue
+            </button>
             <GoogleLogin
               clientId="834798810236-mo101qd4s238ajssl05n4j4t9i2r4ch5.apps.googleusercontent.com"
               render={renderProps => (
-                <button className={styles.secondaryButton} type="button" onClick={renderProps.onClick}>
+                <button
+                    data-test="google-login-button"
+                    className={styles.secondaryButton}
+                    type="button" onClick={renderProps.onClick}>
                   Log In With Google
                   <img src={GoogleSvg} alt="Google" />
                 </button>

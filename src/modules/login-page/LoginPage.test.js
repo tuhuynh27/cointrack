@@ -35,16 +35,41 @@ it('should render a LoginPage with a clickable login button', () => {
         <LoginPage/>
       </Provider>
     </BrowserRouter>, container)
-  expect(container.querySelector('button').disabled).toBeFalsy()
+  expect(container.querySelector(`button[data-test='login-button']`).disabled).toBeFalsy()
 })
 
-it('should render a LoginPage with email and password input', () => {
+it('should render a LoginPage with a clickable Google login button', () => {
   render(
     <BrowserRouter>
       <Provider store={store}>
         <LoginPage/>
       </Provider>
     </BrowserRouter>, container)
-  expect(container.querySelector('input[type="email"]')).toBeTruthy()
-  expect(container.querySelector('input[type="password"]')).toBeTruthy()
+  expect(container.querySelector(`button[data-test='google-login-button']`).disabled).toBeFalsy()
+})
+
+it('should render a LoginPage with email and password input', () => {
+    render(
+        <BrowserRouter>
+            <Provider store={store}>
+                <LoginPage/>
+            </Provider>
+        </BrowserRouter>, container)
+    expect(container.querySelector('input[type="email"]')).toBeTruthy()
+    expect(container.querySelector('input[type="password"]')).toBeTruthy()
+})
+
+it('should render error message when login without email', () => {
+    render(
+        <BrowserRouter>
+            <Provider store={store}>
+                <LoginPage/>
+            </Provider>
+        </BrowserRouter>, container)
+    const emailInput = container.querySelector('input[type="email"]')
+    emailInput.value = ''
+    const loginButton = container.querySelector('button[data-test="login-button"]')
+    loginButton.click()
+    expect(container.querySelector(`p[data-test='email-error']`)).toBeTruthy()
+    expect(container.querySelector('p').textContent).not.toBeNull()
 })
