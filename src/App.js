@@ -1,20 +1,22 @@
-import { Suspense, lazy, useEffect, useLayoutEffect } from 'react'
-import styles from './App.module.scss'
+import React, { Suspense, lazy, useEffect, useLayoutEffect } from 'react'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import {
-  BrowserRouter,
   Routes,
   Route,
-  useLocation
+  useLocation, useNavigate
 } from 'react-router-dom'
 
 import RequireAuth from './components/auth/RequireAuth'
 
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import Layout from 'coinbase-ui/layout/Layout'
+import Navbar from 'coinbase-ui/navbar/Navbar'
+import Content from 'coinbase-ui/content/Content'
 
-import Navbar from './components/navbar/Navbar'
 import LoadingFullPage from './components/loading-full-page/LoadingFullPage'
 import ErrorBoundary from './components/error-boundary/ErrorBoundary'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout, selectProfile } from './modules/profile/profileSlice'
 
 const LandingPage = lazy(() => import('./modules/landing-page/LandingPage'))
 const Portfolio = lazy(() => import('./modules/portfolio/Portfolio'))
@@ -99,7 +101,34 @@ const routes = [
   }
 ]
 
-function Router() {
+const menu = [
+  {
+    text: 'Portfolio',
+    link: '/portfolio'
+  },
+  {
+    text: 'Transactions',
+    link: '/transactions'
+  },
+  {
+    text: 'PnL Analysis',
+    link: '/pnl'
+  },
+  {
+    text: 'Bot Trading',
+    link: '/bot-trading'
+  },
+  {
+    text: 'Market Updates',
+    link: '/market-updates'
+  }
+]
+
+export default function App() {
+  const profile = useSelector(selectProfile)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const location = useLocation()
 
   useEffect(() => {
@@ -113,31 +142,30 @@ function Router() {
   }, [location.pathname])
 
   return (
-    <TransitionGroup>
-      <CSSTransition key={location.pathname} exit={false} classNames="fade" timeout={300}>
-        <div className={styles.outlet}>
-          <ErrorBoundary>
-            <Suspense fallback={<LoadingFullPage/>}>
-              <Routes>
-                {routes.map(route => (
-                  <Route key={route.path} {...route} />
-                ))}
-              </Routes>
-            </Suspense>
-          </ErrorBoundary>
-        </div>
-      </CSSTransition>
-    </TransitionGroup>
-  )
-}
-
-export default function App() {
-  return (
-    <BrowserRouter>
-      <div className={styles.app}>
-        <Navbar/>
-        <Router/>
-      </div>
-    </BrowserRouter>
+    <Layout theme={{
+      logo: require('./assets/img/logo.png')
+    }}>
+      <Navbar
+        menu={menu}
+        profile={profile}
+        onLogin={() => navigate('/login')}
+        onLogout={() => dispatch(logout())}
+      />
+      <TransitionGroup>
+        <CSSTransition key={location.pathname} exit={false} classNames="fade" timeout={300}>
+          <Content>
+            <ErrorBoundary>
+              <Suspense fallback={<LoadingFullPage/>}>
+                <Routes>
+                  {routes.map(route => (
+                    <Route key={route.path} {...route} />
+                  ))}
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
+          </Content>
+        </CSSTransition>
+      </TransitionGroup>
+    </Layout>
   )
 }

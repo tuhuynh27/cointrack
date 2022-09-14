@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './PriceTable.module.scss'
-import RenderIf from 'components/condition/RenderIf'
+import RenderIf from 'coinbase-ui/condition/RenderIf'
 
 function getColumnClassName(col) {
   if (col.isPrimary) {

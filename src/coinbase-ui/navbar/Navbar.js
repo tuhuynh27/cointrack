@@ -1,44 +1,20 @@
-import React, { useState } from 'react'
 import styles from './Navbar.module.scss'
-
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import RenderIf from 'coinbase-ui/condition/RenderIf'
+import Button from 'coinbase-ui/button/Button'
 import { CSSTransition } from 'react-transition-group'
+import React, { useState, useContext } from 'react'
+import ThemeContext from 'coinbase-ui/context/ThemeContext'
 
-import Logo from 'assets/img/logo.png'
-import { useSelector } from 'react-redux'
-import { logout, selectProfile } from 'modules/profile/profileSlice'
-import { useDispatch } from 'react-redux'
-import RenderIf from 'components/condition/RenderIf'
+function Navbar({ menu = [], profile = {
+  name: 'John Doe',
+  isLoggedIn: false,
+  profileImage: 'https://randomuser.me/api/portraits',
+}, onLogin = () => {}, onLogout = () => {} }) {
+  const theme = useContext(ThemeContext);
 
-const menu = [
-  {
-    text: 'Portfolio',
-    link: '/portfolio'
-  },
-  {
-    text: 'Transactions',
-    link: '/transactions'
-  },
-  {
-    text: 'PnL Analysis',
-    link: '/pnl'
-  },
-  {
-    text: 'Bot Trading',
-    link: '/bot-trading'
-  },
-  {
-    text: 'Market Updates',
-    link: '/market-updates'
-  }
-]
-
-function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false)
-  const profile = useSelector(selectProfile)
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   function toggleMobileMenu() {
     setIsMobileMenuOpen(m => !m)
@@ -48,7 +24,7 @@ function Navbar() {
     <React.Fragment>
       <div className={styles.navbar}>
         <div className={styles.inner}>
-          <Link to="/" onClick={() => setIsMobileMenuOpen(false)}><img src={Logo} alt="Logo"/></Link>
+          <Link to="/" onClick={() => setIsMobileMenuOpen(false)}><img src={theme.logo} alt="Logo"/></Link>
           <div className={styles.menu}>
             {menu.map(m => (
               <Link to={m.link} key={m.link}><div>{m.text}</div></Link>
@@ -56,13 +32,13 @@ function Navbar() {
           </div>
           <div className={styles.buttons}>
             <RenderIf value={!profile.isLoggedIn}>
-              <Link to='/login'><button className={styles.signIn}>Sign in</button></Link>
+              <Link to='/login'><Button type="secondary" noBorder className={styles.hideOnMobile}>Sign in</Button></Link>
               <Link to='/login' onClick={() => setIsMobileMenuOpen(false)}>
-                <button className={styles.getStarted}>Get started</button></Link>
+                <Button>Get started</Button></Link>
             </RenderIf>
             <RenderIf value={profile.isLoggedIn}>
               <Link to='/upgrade' onClick={() => setIsMobileMenuOpen(false)}>
-                <button className={styles.getStarted}>Upgrade+</button></Link>
+                <Button type="secondary">Upgrade+</Button></Link>
               <div className={styles.avatarSection}>
                 <img onClick={() => setProfileDropdownOpen(t => !t)}
                      src={profile.profileImage} alt="Avatar" crossOrigin="anonymous"/>
@@ -71,7 +47,7 @@ function Navbar() {
                 {profileDropdownOpen && <div className={styles.dropdownMenu}>
                   <div>Profile Page</div>
                   <div onClick={() => {
-                    dispatch(logout())
+                    onLogout()
                     setProfileDropdownOpen(false)
                   }}>Logout</div>
                 </div>}
@@ -98,22 +74,22 @@ function Navbar() {
           </div>
           <div className={styles.mobileButtons}>
             <RenderIf value={!profile.isLoggedIn}>
-              <button className={styles.getStarted} onClick={() => {
+              <Button fullWidth light onClick={() => {
                 toggleMobileMenu()
-                navigate('/login')
-              }}>Get started</button>
-              <button className={styles.signIn} onClick={() => {
+                onLogin()
+              }}>Get started</Button>
+              <Button type="secondary" fullWidth light onClick={() => {
                 toggleMobileMenu()
-                navigate('/login')
-              }}>Sign in</button>
+                onLogin()
+              }}>Sign in</Button>
             </RenderIf>
             <RenderIf value={profile.isLoggedIn}>
               <img src={profile.profileImage} alt="Down"/>
               <p>Hi, {profile.name}</p>
-              <button className={styles.signIn} onClick={() => {
+              <Button type="secondary" fullWidth light onClick={() => {
                 setIsMobileMenuOpen(false)
-                dispatch(logout())
-              }}>Logout</button>
+                onLogout()
+              }}>Logout</Button>
             </RenderIf>
           </div>
         </div>

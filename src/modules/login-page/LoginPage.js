@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './LoginPage.module.scss'
 
+import Button from 'coinbase-ui/button/Button'
+
 import { validateEmail } from 'utils/validation'
 import { getQueryParam } from 'utils/queryString'
 
@@ -118,23 +120,29 @@ function LoginPage() {
               <p data-test="password-error" className={styles.errorMessage}>{passwordError}</p> : null}
           </div>
           <div className={styles.buttonGroup}>
-            <button
+            <Button
+              big
               data-test="login-button"
               disabled={isLoading}
-              className={isLoading ? styles.loading : null} onClick={handleSubmit}
+              loading={isLoading} onClick={handleSubmit}
               type="submit">
               Continue
-            </button>
+            </Button>
             <GoogleLogin
               clientId="834798810236-mo101qd4s238ajssl05n4j4t9i2r4ch5.apps.googleusercontent.com"
               render={renderProps => (
-                <button
+                <Button
+                  type="secondary"
+                  big
+                  style={{
+                    border: '1.5px solid var(--border-color)',
+                    color: 'black'
+                  }}
                   data-test="google-login-button"
-                  className={styles.secondaryButton}
-                  type="button" onClick={renderProps.onClick}>
+                  onClick={renderProps.onClick}>
                   Log In With Google
                   <img src={GoogleSvg} alt="Google"/>
-                </button>
+                </Button>
               )}
               buttonText="Login with Google"
               onSuccess={responseGoogle}

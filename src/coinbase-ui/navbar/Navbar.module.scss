@@ -61,35 +61,14 @@
       flex-direction: row;
       gap: 10px;
       align-items: center;
+
       @media screen and (max-width: 889px) {
         gap: 20px;
       }
 
-      button {
-        border: 0;
-        padding: 8px 14px;
-        background: var(--primary-color);
-        color: white;
-        border-radius: 5px;
-        font-weight: 500;
-        font-size: 14px;
-        min-width: 100px;
-
-        &.signIn {
-          background: white;
-          color: black;
-
-          &:hover {
-            color: var(--primary-color);
-          }
-
-          @media screen and (max-width: 899px) {
-            display: none;
-          }
-        }
-
-        &.getStarted {
-
+      .hideOnMobile {
+        @media screen and (max-width: 889px) {
+          display: none;
         }
       }
 
@@ -286,30 +265,6 @@
 
       @media screen and (max-width: 320px) {
         display: none;
-      }
-    }
-
-    button {
-      border: 0;
-      padding: 18px 0;
-      width: 90%;
-      background: var(--primary-color);
-      color: white;
-      border-radius: 5px;
-      font-size: 14px;
-
-      &.signIn {
-        background: white;
-        color: var(--primary-color);
-        border: 1.5px solid var(--primary-color);;
-
-        &:hover {
-          color: var(--primary-color);
-        }
-      }
-
-      &.getStarted {
-
       }
     }
   }

@@ -5,7 +5,7 @@ import Heading from './heading/Heading'
 import IndexTable from './index-table/IndexTable'
 import PortfolioShow from './portfolio-show/PortfolioShow'
 import Footer from './footer/Footer'
-import RenderIf from 'components/condition/RenderIf'
+import RenderIf from 'coinbase-ui/condition/RenderIf'
 
 import { useSelector } from 'react-redux'
 import { selectProfile } from 'modules/profile/profileSlice'
